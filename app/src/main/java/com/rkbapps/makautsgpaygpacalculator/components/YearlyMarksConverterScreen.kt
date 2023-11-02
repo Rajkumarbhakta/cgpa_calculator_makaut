@@ -95,6 +95,24 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
                 .verticalScroll(rememberScrollState())
         ) {
 
+            if (oddSemSgpa.value.isEmpty()) {
+                oddSemPercentage.value = ""
+                yearPercentage.value = ""
+            }
+            if (oddSemTotalSubject.value.isEmpty()) {
+                oddSemTotalNumber.value = ""
+                yearTotalNumber.value = ""
+            }
+            if (evenSemSgpa.value.isEmpty()) {
+                evenSemPercentage.value = ""
+                yearPercentage.value = ""
+            }
+            if (evenSemTotalSubject.value.isEmpty()) {
+                evenSemTotalNumber.value = ""
+                yearTotalNumber.value = ""
+            }
+
+
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
@@ -132,46 +150,65 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
                 Button(onClick = {
                     try {
                         if (oddSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) {
-                            try {
-                                oddSemTotalNumber.value =
-                                    calculateTotalNumber(oddSemTotalSubject.value.toInt()).toString()
-                                oddSemPercentage.value =
-                                    calculatePercentage(oddSemSgpa.value.toDouble()).toString()
-                                oddSemObtainedNumber.value = calculateObtainedNumber(
-                                    oddSemTotalSubject.value.toInt(),
-                                    oddSemPercentage.value.toDouble()
-                                ).toString()
+                            if (oddSemSgpa.value.toDouble() <= 10) {
+                                try {
+                                    oddSemTotalNumber.value =
+                                        calculateTotalNumber(oddSemTotalSubject.value.toInt()).toString()
+                                    oddSemPercentage.value =
+                                        calculatePercentage(oddSemSgpa.value.toDouble()).toString()
+                                    oddSemObtainedNumber.value = calculateObtainedNumber(
+                                        oddSemTotalSubject.value.toInt(),
+                                        oddSemPercentage.value.toDouble()
+                                    ).toString()
 
-                            } catch (e: Exception) {
+                                } catch (e: Exception) {
+                                    Toast.makeText(
+                                        context,
+                                        "Please provide proper odd sem details.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            } else {
                                 Toast.makeText(
                                     context,
-                                    "Please provide proper odd sem details.",
+                                    "Odd semester sgpa should be between 1 to 10.",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         }
+//                        else{
+//                            Toast.makeText(context, "Please provide proper details.", Toast.LENGTH_SHORT).show()
+//                        }
 
                         if (evenSemTotalSubject.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) {
-                            try {
-
-                                evenSemTotalNumber.value =
-                                    calculateTotalNumber(evenSemTotalSubject.value.toInt()).toString()
-                                evenSemPercentage.value =
-                                    calculatePercentage(evenSemSgpa.value.toDouble()).toString()
-                                evenSemObtainedNumber.value = calculateObtainedNumber(
-                                    evenSemTotalSubject.value.toInt(),
-                                    evenSemPercentage.value.toDouble()
-                                ).toString()
-
-
-                            } catch (e: Exception) {
+                            if (evenSemSgpa.value.toDouble() <= 10) {
+                                try {
+                                    evenSemTotalNumber.value =
+                                        calculateTotalNumber(evenSemTotalSubject.value.toInt()).toString()
+                                    evenSemPercentage.value =
+                                        calculatePercentage(evenSemSgpa.value.toDouble()).toString()
+                                    evenSemObtainedNumber.value = calculateObtainedNumber(
+                                        evenSemTotalSubject.value.toInt(),
+                                        evenSemPercentage.value.toDouble()
+                                    ).toString()
+                                } catch (e: Exception) {
+                                    Toast.makeText(
+                                        context,
+                                        "Please provide proper even sem details.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            } else {
                                 Toast.makeText(
                                     context,
-                                    "Please provide proper even sem details.",
+                                    "Even semester sgpa should be between 1 to 10.",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                         }
+//                        else{
+//                            Toast.makeText(context, "Please provide proper details.", Toast.LENGTH_SHORT).show()
+//                        }
 
                         if (oddSemTotalSubject.value.isNotEmpty() && evenSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) {
 
@@ -194,6 +231,9 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
                                 ).show()
                             }
                         }
+//                        else{
+//                            Toast.makeText(context, "Please provide proper details.", Toast.LENGTH_SHORT).show()
+//                        }
 
 
                     } catch (e: Exception) {

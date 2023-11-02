@@ -237,7 +237,6 @@ fun SgpaYgpaPersentageCalculatorScreen(navController: NavHostController) {
     }
 }
 
-
 @Composable
 fun GradeScaleShowItem(grade: String, percentage: String) {
 
