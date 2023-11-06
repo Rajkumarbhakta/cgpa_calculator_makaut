@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.rkbapps.makautsgpaygpacalculator.components.AboutScreen
 import com.rkbapps.makautsgpaygpacalculator.components.DgpaCalculatorScreen
 import com.rkbapps.makautsgpaygpacalculator.components.HomeScreen
 import com.rkbapps.makautsgpaygpacalculator.components.MidSemCalculatorScreen
@@ -28,6 +29,10 @@ fun NavGraph(navController: NavHostController) {
         }
         composable(route = NavigationRoute.SgpaYgpaPersentageCalculator.route) {
             SgpaYgpaPersentageCalculatorScreen(navController = navController)
+        }
+
+        composable(route = NavigationRoute.AboutUs.route){
+            AboutScreen()
         }
 
     }

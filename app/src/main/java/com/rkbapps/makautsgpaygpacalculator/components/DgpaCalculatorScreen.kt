@@ -125,7 +125,6 @@ object CourseType {
     const val FOUR_YEAR_DEGREE = "4 year degree"
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChooseCourseTypeItem(
@@ -176,7 +175,6 @@ fun ChooseCourseTypeItem(
         }
     }
 }
-
 
 @Composable
 fun SemesterSgpaInputField(

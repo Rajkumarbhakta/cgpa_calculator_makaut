@@ -94,6 +94,7 @@ fun HomeScreen(navController: NavHostController) {
             ) {
                 HomeScreenRowItems(image = R.drawable.about_us, title = "About us") {
 
+                    navController.navigate(NavigationRoute.AboutUs.route)
 
                 }
                 Spacer(modifier = Modifier.width(5.dp))
@@ -130,10 +131,11 @@ fun HomeScreenTopBar(
             IconButton(onClick = {
                 onBackClick()
             }) {
-                Icon(imageVector = Icons.Default.ArrowBack,
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
                     contentDescription = "back",
                     tint = MaterialTheme.colorScheme.onPrimary
-                    )
+                )
             }
         }
         Text(

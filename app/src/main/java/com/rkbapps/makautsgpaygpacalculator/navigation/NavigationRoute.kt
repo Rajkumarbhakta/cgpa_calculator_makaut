@@ -6,4 +6,5 @@ sealed class NavigationRoute(val route: String) {
     object MidSemCalculator : NavigationRoute(route = "mid_sem_calculator")
     object DgpaCalculator : NavigationRoute(route = "dgpa_calculator")
     object SgpaYgpaPersentageCalculator : NavigationRoute(route = "sgpa_ygpa_percentage_calculator")
+    object AboutUs:NavigationRoute(route = "about_us")
 }
