@@ -84,29 +84,40 @@ fun HomeScreen(navController: NavHostController) {
 
             }
 
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
+            Column(
+                Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 16.dp)
             ) {
-                HomeScreenRowItems(image = R.drawable.about_us, title = "About us") {
-
-                    navController.navigate(NavigationRoute.AboutUs.route)
-
-                }
-                Spacer(modifier = Modifier.width(5.dp))
-                HomeScreenRowItems(image = R.drawable.github, title = "GitHub") {
-
-
-                }
-                Spacer(modifier = Modifier.width(5.dp))
-                HomeScreenRowItems(image = R.drawable.faq, title = "FAQ") {
-
-                }
+                Text(
+                    text = "Made with ❤️ \n by 'RKB APPS' and 'WE & YOU'",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Center
+                )
             }
+
+//            Row(
+//                verticalAlignment = Alignment.CenterVertically,
+//                horizontalArrangement = Arrangement.Center,
+//                modifier = Modifier
+//                    .fillMaxWidth()
+//                    .padding(horizontal = 16.dp, vertical = 16.dp)
+//            ) {
+//                HomeScreenRowItems(image = R.drawable.about_us, title = "About us") {
+//
+//                    navController.navigate(NavigationRoute.AboutUs.route)
+//
+//                }
+//                Spacer(modifier = Modifier.width(5.dp))
+//                HomeScreenRowItems(image = R.drawable.github, title = "GitHub") {
+//
+//
+//                }
+//                Spacer(modifier = Modifier.width(5.dp))
+//                HomeScreenRowItems(image = R.drawable.faq, title = "FAQ") {
+//
+//                }
+//            }
         }
     }
 

@@ -132,7 +132,7 @@ fun MidSemCalculatorScreen(navController: NavHostController) {
             }
             Text(
                 text = "Choose Semester Up To :",
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -150,7 +150,7 @@ fun MidSemCalculatorScreen(navController: NavHostController) {
 
             Text(
                 text = "Put GPA : ",
-                style = MaterialTheme.typography.titleLarge,
+                style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp, vertical = 8.dp)
@@ -342,7 +342,7 @@ fun SemesterNumberFromItem(semester: String = "", cgpa: MutableState<String>) {
         verticalAlignment = Alignment.CenterVertically
     ) {
 
-        Text(text = semester, style = MaterialTheme.typography.titleMedium)
+        Text(text = semester, style = MaterialTheme.typography.titleSmall)
         Spacer(modifier = Modifier.width(5.dp))
         OutlinedTextField(
             value = cgpa.value,
