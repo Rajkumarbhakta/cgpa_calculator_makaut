@@ -346,15 +346,16 @@ fun FourYearDegreeItem(context: Context) {
                         seventhSemester.value.isNotEmpty() &&
                         eighthSemester.value.isNotEmpty()
                     ) {
-                        val total = firstSemester.value.toDouble() +
-                                secondSemester.value.toDouble() +
-                                thirdSemester.value.toDouble() +
-                                fourthSemester.value.toDouble() +
-                                fifthSemester.value.toDouble() +
-                                sixthSemester.value.toDouble() +
-                                seventhSemester.value.toDouble() +
+                        val ygpa1 = firstSemester.value.toDouble() +
+                                secondSemester.value.toDouble()
+                        val ygpa2 = thirdSemester.value.toDouble() +
+                                fourthSemester.value.toDouble()
+                        val ygpa3 = fifthSemester.value.toDouble() +
+                                sixthSemester.value.toDouble()
+                        val ygpa4 = seventhSemester.value.toDouble() +
                                 eighthSemester.value.toDouble()
-                        val average = total / 8
+                        val total = ygpa1 + ygpa2 + (1.5 * ygpa3) + (1.5 * ygpa4)
+                        val average = total / 5
                         overallDgpa.doubleValue = String.format("%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
                     } else {
@@ -562,13 +563,17 @@ fun ThreeYearLateralItem(context: Context) {
                         seventhSemester.value.isNotEmpty() &&
                         eighthSemester.value.isNotEmpty()
                     ) {
-                        val total = thirdSemester.value.toDouble() +
-                                fourthSemester.value.toDouble() +
-                                fifthSemester.value.toDouble() +
-                                sixthSemester.value.toDouble() +
-                                seventhSemester.value.toDouble() +
+
+                        val ygpa2 = thirdSemester.value.toDouble() +
+                                fourthSemester.value.toDouble()
+                        val ygpa3 = fifthSemester.value.toDouble() +
+                                sixthSemester.value.toDouble()
+                        val ygpa4 = seventhSemester.value.toDouble() +
                                 eighthSemester.value.toDouble()
-                        val average = total / 6
+
+                        val total = ygpa2 + (1.5 * ygpa3) + (1.5 * ygpa4)
+
+                        val average = total / 4
                         overallDgpa.doubleValue = String.format("%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
                     } else {
@@ -776,12 +781,17 @@ fun ThreeYearDegreeItem(context: Context) {
                         fifthSemester.value.isNotEmpty() &&
                         sixthSemester.value.isNotEmpty()
                     ) {
-                        val total = firstSemester.value.toDouble() +
-                                secondSemester.value.toDouble() +
-                                thirdSemester.value.toDouble() +
-                                fourthSemester.value.toDouble() +
-                                fifthSemester.value.toDouble() +
+
+                        val ygpa1 = firstSemester.value.toDouble() +
+                                secondSemester.value.toDouble()
+                        val ygpa2 = thirdSemester.value.toDouble() +
+                                fourthSemester.value.toDouble()
+
+                        val ygpa3 = fifthSemester.value.toDouble() +
                                 sixthSemester.value.toDouble()
+
+                        val total = ygpa1 + ygpa2 + ygpa3
+
                         val average = total / 6
                         overallDgpa.doubleValue = String.format("%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
@@ -873,7 +883,6 @@ fun ThreeYearDegreeItem(context: Context) {
             }
         }
     }
-
 }
 
 
