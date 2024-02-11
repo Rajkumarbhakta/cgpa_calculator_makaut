@@ -90,7 +90,7 @@ fun HomeScreen(navController: NavHostController) {
                     .padding(horizontal = 16.dp, vertical = 16.dp)
             ) {
                 Text(
-                    text = "Made with ❤️ \n by 'RKB APPS' and 'WE & YOU'",
+                    text = "Made with ❤️ \n by 'RKB APPS'",
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
@@ -180,12 +180,8 @@ fun HomeScreenListItems(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-
             Text(text = title, style = MaterialTheme.typography.titleMedium)
-
             Text(text = body, style = MaterialTheme.typography.bodyMedium)
-
-
         }
     }
 
