@@ -198,7 +198,8 @@ fun SemesterSgpaInputField(
         supportingText = {
             Text(text = "Enter $placeHolderText semester SGPA.")
         },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        singleLine = true
     )
 
 }

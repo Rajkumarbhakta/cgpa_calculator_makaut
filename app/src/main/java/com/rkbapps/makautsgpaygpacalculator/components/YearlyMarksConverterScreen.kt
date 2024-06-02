@@ -37,6 +37,7 @@ import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateObtainedNumber
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateTotalNumber
+import kotlin.math.sin
 
 @Composable
 fun YearlyMarksConverterScreen(navController: NavHostController) {
@@ -387,7 +388,8 @@ fun SemesterInputItem(
                         text = "Enter total subjects including practical subjects.",
                     )
                 }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
             )
             OutlinedTextField(
                 value = sgpa.value, onValueChange = {
@@ -400,7 +402,8 @@ fun SemesterInputItem(
                     )
                 },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                singleLine = true
             )
         }
     }

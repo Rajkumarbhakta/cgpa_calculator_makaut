@@ -350,7 +350,8 @@ fun SemesterNumberFromItem(semester: String = "", cgpa: MutableState<String>) {
                 cgpa.value = it
             },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.weight(1f)
+            modifier = Modifier.weight(1f),
+            singleLine = true
         )
     }
 }
