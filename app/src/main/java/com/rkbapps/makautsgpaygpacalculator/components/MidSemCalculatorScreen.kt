@@ -40,7 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun MidSemCalculatorScreen(navController: NavHostController) {
 

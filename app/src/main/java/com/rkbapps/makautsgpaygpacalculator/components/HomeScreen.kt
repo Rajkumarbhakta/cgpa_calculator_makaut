@@ -90,7 +90,7 @@ fun HomeScreen(navController: NavHostController) {
                     .padding(horizontal = 16.dp, vertical = 16.dp)
             ) {
                 Text(
-                    text = "Made with ❤️ \n by 'RKB APPS'",
+                    text = "Made with ❤️\nby 'RKB APPS'",
                     modifier = Modifier.fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
