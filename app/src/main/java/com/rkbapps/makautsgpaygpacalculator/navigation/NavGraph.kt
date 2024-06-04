@@ -6,12 +6,13 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.rkbapps.makautsgpaygpacalculator.components.AboutScreen
-import com.rkbapps.makautsgpaygpacalculator.components.DgpaCalculatorScreen
-import com.rkbapps.makautsgpaygpacalculator.components.HomeScreen
-import com.rkbapps.makautsgpaygpacalculator.components.MidSemCalculatorScreen
-import com.rkbapps.makautsgpaygpacalculator.components.SgpaYgpaPersentageCalculatorScreen
-import com.rkbapps.makautsgpaygpacalculator.components.YearlyMarksConverterScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.about.AboutScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.dgpa.DgpaCalculatorScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.history.HistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.midsem.MidSemCalculatorScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.ygpa.SgpaYgpaPersentageCalculatorScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.yearly.YearlyMarksConverterScreen
 
 @Composable
 fun NavGraph(navController: NavHostController) {
@@ -163,6 +164,35 @@ fun NavGraph(navController: NavHostController) {
             }
             ){
             AboutScreen()
+        }
+
+        composable(route = NavigationRoute.History.route,
+            popEnterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700)
+                )
+            },
+            popExitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700)
+                )
+            },
+            enterTransition = {
+                slideIntoContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Left,
+                    animationSpec = tween(700)
+                )
+            },
+            exitTransition = {
+                slideOutOfContainer(
+                    AnimatedContentTransitionScope.SlideDirection.Right,
+                    animationSpec = tween(700)
+                )
+            }
+        ){
+            HistoryScreen(navController)
         }
 
     }

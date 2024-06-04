@@ -1,4 +1,4 @@
-package com.rkbapps.makautsgpaygpacalculator.components
+package com.rkbapps.makautsgpaygpacalculator.screens.midsem
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -38,6 +38,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreenTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 
