@@ -42,5 +42,8 @@ interface GpaPercentageDao {
     @Query("select * from gpapercentage where isFavorite=:isFavorite order by timeStamps asc")
      fun getAllFavoriteSortedByTimeAsc(isFavorite: Boolean = true ): Flow<List<GpaPercentage>>
 
+     @Query("delete from gpapercentage where isFavorite=:isFavorite")
+     suspend fun deleteAll(isFavorite: Boolean = false)
+
 
 }

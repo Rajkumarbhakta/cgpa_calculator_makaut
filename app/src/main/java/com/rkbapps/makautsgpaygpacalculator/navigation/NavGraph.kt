@@ -10,6 +10,7 @@ import com.rkbapps.makautsgpaygpacalculator.screens.about.AboutScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.dgpa.DgpaCalculatorScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.history.HistoryScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.history.yearly.YearlyMarksHistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.history.ygpa.SgpaYgpaHistoryScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.midsem.MidSemCalculatorScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.ygpa.SgpaYgpaPersentageCalculatorScreen
@@ -198,6 +199,10 @@ fun NavGraph(navController: NavHostController) {
 
         composable(route=NavigationRoute.YearlyMarksHistory.route){
             YearlyMarksHistoryScreen(navController)
+        }
+        
+        composable(route=NavigationRoute.SgpaYgpaPercentageHistory.route){
+            SgpaYgpaHistoryScreen(navController = navController)
         }
 
     }
