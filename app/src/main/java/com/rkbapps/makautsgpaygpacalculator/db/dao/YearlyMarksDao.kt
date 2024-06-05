@@ -41,4 +41,9 @@ interface YearlyMarksDao {
     @Query("select * from yearlymarks where isFavourite=:isFavourite order by timeStamp asc")
      fun getFavouriteSortedByTimeStampAsc(isFavourite:Boolean = true):Flow<List<YearlyMarks>>
 
+     @Query("delete from yearlymarks where isFavourite=:isFavourite")
+     suspend fun deleteHistory(isFavourite:Boolean = false)
+
+
+
 }

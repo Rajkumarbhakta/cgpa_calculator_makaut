@@ -32,7 +32,7 @@ fun HistoryScreen(navController: NavHostController) {
             HomeScreenItem(
                 title = "Yearly Marks % Convert",
                 subTitle = "Get All History of Yearly Marks % Convert",
-                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksCalculator.route)}
+                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksHistory.route)}
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",

@@ -27,7 +27,7 @@ data class YearlyMarks(
     val totalMarks: Int=0,
     val totalPercentage: Double=0.0,
 
-    val isFavourite: Boolean=false,
+    var isFavourite: Boolean=false,
 
     val timeStamp: Long = System.currentTimeMillis()
 )
