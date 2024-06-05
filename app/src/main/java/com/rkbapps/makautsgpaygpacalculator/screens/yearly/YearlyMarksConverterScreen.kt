@@ -60,7 +60,6 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
     val evenSemSgpa = rememberSaveable {
         mutableStateOf("")
     }
-
     val oddSemObtainedNumber = rememberSaveable {
         mutableStateOf("")
     }
@@ -79,7 +78,6 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
     val evenSemPercentage = rememberSaveable {
         mutableStateOf("")
     }
-
     val yearObtainedNumber = rememberSaveable {
         mutableStateOf("")
     }
@@ -240,28 +238,28 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
                                 ).show()
                             }
                         }
-//                        else{
-//                            Toast.makeText(context, "Please provide proper details.", Toast.LENGTH_SHORT).show()
-//                        }
 
-                        viewModel.insert(YearlyMarks(
-                            //even sem
-                            evenSemSubjects = if (evenSemTotalSubject.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemTotalSubject.value.toInt() else 0,
-                            evenSemGpa = if (evenSemTotalSubject.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemSgpa.value.toDouble() else 0.0,
-                            evenSemPercentage = if (evenSemPercentage.value.isNotEmpty()) evenSemPercentage.value.toDouble() else 0.0,
-                            evenSemObtainedMarks = if (evenSemObtainedNumber.value.isNotEmpty()) evenSemObtainedNumber.value.toDouble() else 0.0,
-                            evenSemTotalMarks = if (evenSemTotalNumber.value.isNotEmpty()) evenSemTotalNumber.value.toInt() else 0,
-                            //odd sem
-                            oddSemSubjects = if (oddSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemTotalSubject.value.toInt() else 0,
-                            oddSemGpa = if (oddSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemSgpa.value.toDouble() else 0.0,
-                            oddSemPercentage = if (oddSemPercentage.value.isNotEmpty()) oddSemPercentage.value.toDouble() else 0.0,
-                            oddSemObtainedMarks = if (oddSemObtainedNumber.value.isNotEmpty()) oddSemObtainedNumber.value.toDouble() else 0.0,
-                            oddSemTotalMarks = if (oddSemTotalNumber.value.isNotEmpty()) oddSemTotalNumber.value.toInt() else 0,
-                            //total calculation
-                            totalMarks = if (yearTotalNumber.value.isNotEmpty()) yearTotalNumber.value.toInt() else 0,
-                            totalPercentage = if (yearPercentage.value.isNotEmpty()) yearPercentage.value.toDouble() else 0.0,
-                            totalObtainedMarks = if (yearObtainedNumber.value.isNotEmpty()) yearObtainedNumber.value.toDouble() else 0.0,
-                        ))
+                        //saving history of calculation
+                        if ((evenSemSgpa.value.isNotEmpty()&&evenSemTotalSubject.value.isNotEmpty()) || (oddSemSgpa.value.isNotEmpty()&&oddSemTotalSubject.value.isNotEmpty())){
+                            viewModel.insert(YearlyMarks(
+                                //even sem
+                                evenSemSubjects = if (evenSemTotalSubject.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemTotalSubject.value.toInt() else 0,
+                                evenSemGpa = if (evenSemTotalSubject.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemSgpa.value.toDouble() else 0.0,
+                                evenSemPercentage = if (evenSemPercentage.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemPercentage.value.toDouble() else 0.0,
+                                evenSemObtainedMarks = if (evenSemObtainedNumber.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemObtainedNumber.value.toDouble() else 0.0,
+                                evenSemTotalMarks = if (evenSemTotalNumber.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemTotalNumber.value.toInt() else 0,
+                                //odd sem
+                                oddSemSubjects = if (oddSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemTotalSubject.value.toInt() else 0,
+                                oddSemGpa = if (oddSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemSgpa.value.toDouble() else 0.0,
+                                oddSemPercentage = if (oddSemPercentage.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemPercentage.value.toDouble() else 0.0,
+                                oddSemObtainedMarks = if (oddSemObtainedNumber.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemObtainedNumber.value.toDouble() else 0.0,
+                                oddSemTotalMarks = if (oddSemTotalNumber.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemTotalNumber.value.toInt() else 0,
+                                //total calculation
+                                totalMarks = if (yearTotalNumber.value.isNotEmpty() && yearPercentage.value.isNotEmpty()) yearTotalNumber.value.toInt() else 0,
+                                totalPercentage = if (yearPercentage.value.isNotEmpty() && yearTotalNumber.value.isNotEmpty()) yearPercentage.value.toDouble() else 0.0,
+                                totalObtainedMarks = if (yearObtainedNumber.value.isNotEmpty() && yearPercentage.value.isNotEmpty()) yearObtainedNumber.value.toDouble() else 0.0,
+                            ))
+                        }
 
 
                     } catch (e: Exception) {
