@@ -10,4 +10,5 @@ sealed class NavigationRoute(val route: String) {
     data object History:NavigationRoute(route = "history")
     data object YearlyMarksHistory:NavigationRoute(route = "yearly_marks_history")
     data object SgpaYgpaPercentageHistory:NavigationRoute(route = "sgpa_ygpa_percentage_history")
+    data object MidSemHistory:NavigationRoute(route = "mid_sem_history")
 }

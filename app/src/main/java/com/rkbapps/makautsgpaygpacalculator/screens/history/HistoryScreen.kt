@@ -37,7 +37,7 @@ fun HistoryScreen(navController: NavHostController) {
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Get All History of Mid Sem % Calculator",
-                onClick = {navController.navigate(route = NavigationRoute.MidSemCalculator.route)}
+                onClick = {navController.navigate(route = NavigationRoute.MidSemHistory.route)}
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",

@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import com.rkbapps.makautsgpaygpacalculator.screens.about.AboutScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.dgpa.DgpaCalculatorScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.history.HistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.history.midsem.MidSemCalculationHistoryScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.history.yearly.YearlyMarksHistoryScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.history.ygpa.SgpaYgpaHistoryScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreen
@@ -203,6 +204,9 @@ fun NavGraph(navController: NavHostController) {
         
         composable(route=NavigationRoute.SgpaYgpaPercentageHistory.route){
             SgpaYgpaHistoryScreen(navController = navController)
+        }
+        composable(route=NavigationRoute.MidSemHistory.route){
+            MidSemCalculationHistoryScreen(navController = navController)
         }
 
     }

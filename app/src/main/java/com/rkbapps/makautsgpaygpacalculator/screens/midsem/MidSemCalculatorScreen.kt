@@ -37,7 +37,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
+import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarksTypes
 import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreenTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
@@ -46,6 +49,7 @@ import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 fun MidSemCalculatorScreen(navController: NavHostController) {
 
     val context = LocalContext.current
+    val viewModel:MidSemCalculatorViewModel = hiltViewModel()
 
     val selectedIndexText = rememberSaveable {
         mutableStateOf(Options.optionsList[0])
@@ -131,6 +135,7 @@ fun MidSemCalculatorScreen(navController: NavHostController) {
                     count.intValue = 7
                 }
             }
+
             Text(
                 text = "Choose Semester Up To :",
                 style = MaterialTheme.typography.titleMedium,
@@ -230,6 +235,38 @@ fun MidSemCalculatorScreen(navController: NavHostController) {
                             String.format("%.2f", total / count.intValue.toDouble()).toDouble()
                         totalPercentage.doubleValue =
                             calculatePercentage(total / count.intValue.toDouble())
+                        viewModel.insert(DgpaMidSemMarks(
+                            type = when(selectedIndexText.value){
+                                Options.THIRD_SEM -> {
+                                    DgpaMidSemMarksTypes.MID_SEM_3_SEM
+                                }
+                                Options.FOURTH_SEM -> {
+                                    DgpaMidSemMarksTypes.MID_SEM_4_SEM
+                                }
+                                Options.FIFTH_SEM -> {
+                                    DgpaMidSemMarksTypes.MID_SEM_5_SEM
+                                }
+                                Options.SIXTH_SEM -> {
+                                    DgpaMidSemMarksTypes.MID_SEM_6_SEM
+                                }
+                                Options.SEVENTH_SEM -> {
+                                    DgpaMidSemMarksTypes.MID_SEM_7_SEM
+                                }
+                                else->{
+                                    DgpaMidSemMarksTypes.MID_SEM_3_SEM
+                                }
+                            },
+                            firstSemGpa = first,
+                            secondSemGpa = second,
+                            thirdSemGpa = third,
+                            fourthSemGpa = fourth,
+                            fifthSemGpa = fifth,
+                            sixthSemGpa = sixth,
+                            seventhSemGpa = seventh,
+                            avgGpa = totalCgpa.doubleValue,
+                            avgPercentage = totalPercentage.doubleValue
+                        ))
+
                     } catch (e: Exception) {
                         Toast.makeText(context, "Please enter CGPA properly.", Toast.LENGTH_SHORT)
                             .show()
