@@ -42,7 +42,7 @@ fun HistoryScreen(navController: NavHostController) {
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Get All History of DGPA % Calculate from SGPA",
-                onClick = {navController.navigate(route = NavigationRoute.DgpaCalculator.route)}
+                onClick = {navController.navigate(route = NavigationRoute.DgpaHistory.route)}
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
