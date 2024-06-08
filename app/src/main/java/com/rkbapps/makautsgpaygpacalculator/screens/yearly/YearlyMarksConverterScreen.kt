@@ -1,4 +1,4 @@
-package com.rkbapps.makautsgpaygpacalculator.components
+package com.rkbapps.makautsgpaygpacalculator.screens.yearly
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -33,15 +33,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.NavHostController
+import com.rkbapps.makautsgpaygpacalculator.db.entity.YearlyMarks
+import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreenTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateObtainedNumber
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateTotalNumber
-import kotlin.math.sin
+import java.time.Year
 
 @Composable
 fun YearlyMarksConverterScreen(navController: NavHostController) {
     val context = LocalContext.current
+    val viewModel:YearlyMarksViewModel = hiltViewModel()
+
     val oddSemTotalSubject = rememberSaveable {
         mutableStateOf("")
     }
@@ -54,7 +60,6 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
     val evenSemSgpa = rememberSaveable {
         mutableStateOf("")
     }
-
     val oddSemObtainedNumber = rememberSaveable {
         mutableStateOf("")
     }
@@ -73,7 +78,6 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
     val evenSemPercentage = rememberSaveable {
         mutableStateOf("")
     }
-
     val yearObtainedNumber = rememberSaveable {
         mutableStateOf("")
     }
@@ -162,6 +166,7 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
                                         oddSemPercentage.value.toDouble()
                                     ).toString()
 
+
                                 } catch (e: Exception) {
                                     Toast.makeText(
                                         context,
@@ -192,6 +197,7 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
                                         evenSemTotalSubject.value.toInt(),
                                         evenSemPercentage.value.toDouble()
                                     ).toString()
+
                                 } catch (e: Exception) {
                                     Toast.makeText(
                                         context,
@@ -232,9 +238,28 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
                                 ).show()
                             }
                         }
-//                        else{
-//                            Toast.makeText(context, "Please provide proper details.", Toast.LENGTH_SHORT).show()
-//                        }
+
+                        //saving history of calculation
+                        if ((evenSemSgpa.value.isNotEmpty()&&evenSemTotalSubject.value.isNotEmpty()) || (oddSemSgpa.value.isNotEmpty()&&oddSemTotalSubject.value.isNotEmpty())){
+                            viewModel.insert(YearlyMarks(
+                                //even sem
+                                evenSemSubjects = if (evenSemTotalSubject.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemTotalSubject.value.toInt() else 0,
+                                evenSemGpa = if (evenSemTotalSubject.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemSgpa.value.toDouble() else 0.0,
+                                evenSemPercentage = if (evenSemPercentage.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemPercentage.value.toDouble() else 0.0,
+                                evenSemObtainedMarks = if (evenSemObtainedNumber.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemObtainedNumber.value.toDouble() else 0.0,
+                                evenSemTotalMarks = if (evenSemTotalNumber.value.isNotEmpty() && evenSemSgpa.value.isNotEmpty()) evenSemTotalNumber.value.toInt() else 0,
+                                //odd sem
+                                oddSemSubjects = if (oddSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemTotalSubject.value.toInt() else 0,
+                                oddSemGpa = if (oddSemTotalSubject.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemSgpa.value.toDouble() else 0.0,
+                                oddSemPercentage = if (oddSemPercentage.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemPercentage.value.toDouble() else 0.0,
+                                oddSemObtainedMarks = if (oddSemObtainedNumber.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemObtainedNumber.value.toDouble() else 0.0,
+                                oddSemTotalMarks = if (oddSemTotalNumber.value.isNotEmpty() && oddSemSgpa.value.isNotEmpty()) oddSemTotalNumber.value.toInt() else 0,
+                                //total calculation
+                                totalMarks = if (yearTotalNumber.value.isNotEmpty() && yearPercentage.value.isNotEmpty()) yearTotalNumber.value.toInt() else 0,
+                                totalPercentage = if (yearPercentage.value.isNotEmpty() && yearTotalNumber.value.isNotEmpty()) yearPercentage.value.toDouble() else 0.0,
+                                totalObtainedMarks = if (yearObtainedNumber.value.isNotEmpty() && yearPercentage.value.isNotEmpty()) yearObtainedNumber.value.toDouble() else 0.0,
+                            ))
+                        }
 
 
                     } catch (e: Exception) {

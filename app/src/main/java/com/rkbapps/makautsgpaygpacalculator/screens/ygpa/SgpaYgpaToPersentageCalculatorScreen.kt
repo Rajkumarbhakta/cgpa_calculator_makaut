@@ -1,4 +1,4 @@
-package com.rkbapps.makautsgpaygpacalculator.components
+package com.rkbapps.makautsgpaygpacalculator.screens.ygpa
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
@@ -30,13 +30,17 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import com.rkbapps.makautsgpaygpacalculator.db.entity.GpaPercentage
+import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreenTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
 fun SgpaYgpaPersentageCalculatorScreen(navController: NavHostController) {
 
     val context = LocalContext.current
+    val viewModel:SgpaYgpaPercentageViewModel = hiltViewModel()
     val cgpaYgpa = rememberSaveable {
         mutableStateOf("")
     }
@@ -89,6 +93,12 @@ fun SgpaYgpaPersentageCalculatorScreen(navController: NavHostController) {
                             if (cgpaYgpa.value.isNotEmpty() && cgpaYgpa.value.toDouble() <= 10) {
                                 percentage.doubleValue =
                                     calculatePercentage(cgpaYgpa.value.toDouble())
+
+                                viewModel.insert(GpaPercentage(
+                                    gpa = cgpaYgpa.value.toDouble(),
+                                    percentage = percentage.doubleValue
+                                ))
+
                             } else {
                                 Toast.makeText(context, "Enter CGPA/YGPA.", Toast.LENGTH_SHORT)
                                     .show()

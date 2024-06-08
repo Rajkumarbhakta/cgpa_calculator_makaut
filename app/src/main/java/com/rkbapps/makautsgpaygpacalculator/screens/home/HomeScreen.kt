@@ -1,20 +1,20 @@
-package com.rkbapps.makautsgpaygpacalculator.components
+package com.rkbapps.makautsgpaygpacalculator.screens.home
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -23,6 +23,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -40,12 +42,45 @@ import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute
 @Composable
 fun HomeScreen(navController: NavHostController) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.study))
+    val homeItems = remember {
+        mutableStateListOf(
+            HomeScreenItem(
+                title = "Yearly Marks % Convert",
+                subTitle = "Calculate marks for a specific year",
+                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksCalculator.route)}
+            ),
+            HomeScreenItem(
+                title = "Mid Sem % Calculator",
+                subTitle = "Calculate marks for a specific year",
+                onClick = {navController.navigate(route = NavigationRoute.MidSemCalculator.route)}
+            ),
+            HomeScreenItem(
+                title = "DGPA % Calculate from SGPA",
+                subTitle = "Calculate marks for a specific year",
+                onClick = {navController.navigate(route = NavigationRoute.DgpaCalculator.route)}
+            ),
+            HomeScreenItem(
+                title = "SGPA/YGPA to % Calculator",
+                subTitle = "Calculate marks for a specific year",
+                onClick = {navController.navigate(route = NavigationRoute.SgpaYgpaPersentageCalculator.route)}
+            ),
+            HomeScreenItem(
+                title = "History",
+                subTitle = "Check your calculation history.",
+                onClick = {navController.navigate(route = NavigationRoute.History.route)}
+            ),
+
+
+
+        )
+
+    }
     Scaffold(
         topBar = {
             HomeScreenTopBar()
         },
-    ) {
-        Column(modifier = Modifier.padding(it)) {
+    ) { paddingValues ->
+        Column(modifier = Modifier.padding(paddingValues)) {
 
             LottieAnimation(
                 composition = composition,
@@ -55,33 +90,10 @@ fun HomeScreen(navController: NavHostController) {
                     .padding(horizontal = 16.dp)
             )
 
-            HomeScreenListItems(
-                title = "Yearly Marks % Convert",
-                body = "Calculate marks for a specific year"
-            ) {
-                navController.navigate(route = NavigationRoute.YearlyMarksCalculator.route) {
-
+            LazyColumn {
+                items(homeItems){
+                    HomeScreenListItems(item = it)
                 }
-            }
-            HomeScreenListItems(
-                title = "Mid Sem % Calculator",
-                body = "Calculate percentage for mid sem"
-            ) {
-                navController.navigate(route = NavigationRoute.MidSemCalculator.route)
-            }
-            HomeScreenListItems(
-                title = "DGPA % Calculate from SGPA",
-                body = "Calculate percentage for Degree Grade Point"
-            ) {
-                navController.navigate(route = NavigationRoute.DgpaCalculator.route)
-            }
-            HomeScreenListItems(
-                title = "SGPA/YGPA to % Calculator",
-                body = "Calculate your percentage from SGPA or YGPA"
-            ) {
-
-                navController.navigate(route = NavigationRoute.SgpaYgpaPersentageCalculator.route)
-
             }
 
             Column(
@@ -95,33 +107,8 @@ fun HomeScreen(navController: NavHostController) {
                     textAlign = TextAlign.Center
                 )
             }
-
-//            Row(
-//                verticalAlignment = Alignment.CenterVertically,
-//                horizontalArrangement = Arrangement.Center,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .padding(horizontal = 16.dp, vertical = 16.dp)
-//            ) {
-//                HomeScreenRowItems(image = R.drawable.about_us, title = "About us") {
-//
-//                    navController.navigate(NavigationRoute.AboutUs.route)
-//
-//                }
-//                Spacer(modifier = Modifier.width(5.dp))
-//                HomeScreenRowItems(image = R.drawable.github, title = "GitHub") {
-//
-//
-//                }
-//                Spacer(modifier = Modifier.width(5.dp))
-//                HomeScreenRowItems(image = R.drawable.faq, title = "FAQ") {
-//
-//                }
-//            }
         }
     }
-
-
 }
 
 
@@ -161,16 +148,14 @@ fun HomeScreenTopBar(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun HomeScreenListItems(
-    title: String,
-    body: String,
-    onClick: () -> Unit
+   item: HomeScreenItem
 ) {
 
     OutlinedCard(
-        onClick = { onClick() },
+        onClick = { item.onClick.invoke() },
         modifier = Modifier.padding(horizontal = 16.dp, vertical = 5.dp)
     ) {
         Column(
@@ -180,14 +165,14 @@ fun HomeScreenListItems(
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp, vertical = 8.dp)
         ) {
-            Text(text = title, style = MaterialTheme.typography.titleMedium)
-            Text(text = body, style = MaterialTheme.typography.bodyMedium)
+            Text(text = item.title, style = MaterialTheme.typography.titleMedium)
+            Text(text = item.subTitle, style = MaterialTheme.typography.bodyMedium)
         }
     }
 
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 fun HomeScreenRowItems(
     image: Int,
@@ -221,3 +206,9 @@ fun HomeScreenRowItems(
         }
     }
 }
+
+data class HomeScreenItem(
+    val title: String,
+    val subTitle: String,
+    val onClick: () -> Unit
+)
