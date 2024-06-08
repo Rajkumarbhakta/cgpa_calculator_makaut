@@ -18,6 +18,7 @@
 - Jetpack
     - [Compose](https://developer.android.com/jetpack/compose) : A modern toolkit for building native Android UI.
     - [Navigation](https://developer.android.com/jetpack/compose/navigation) : Navigation refers to the interactions that allow users to navigate across, into, and back out from the different pieces of content within your app.
+    - [Room](https://developer.android.com/jetpack/androidx/releases/room) : The Room persistence library provides an abstraction layer over SQLite to allow for more robust database access while harnessing the full power of SQLite.
 
 
 # License
