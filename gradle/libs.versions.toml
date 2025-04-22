@@ -1,24 +1,24 @@
 [versions]
-activityCompose = "1.9.0"
-androidGradlePlugin = "8.4.1"
-composeBom = "2024.05.00"
-coreKtx = "1.13.1"
-espressoCore = "3.5.1"
-hiltAndroid = "2.48"
-hiltAndroidCompiler = "2.48"
+activityCompose = "1.10.1"
+androidGradlePlugin = "8.9.1"
+composeBom = "2025.04.00"
+coreKtx = "1.16.0"
+espressoCore = "3.6.1"
+hiltAndroid = "2.56.1"
+hiltAndroidCompiler = "2.56.1"
 hiltNavigationCompose = "1.2.0"
 junit = "4.13.2"
-junitVersion = "1.1.5"
-kotlinVersion = "1.9.24"
-kspVersion = "1.9.24-1.0.20"
-kotlinxCoroutinesAndroid = "1.8.0"
-kotlinxCoroutinesCore = "1.8.0"
-lifecycleRuntimeKtx = "2.8.1"
+junitVersion = "1.2.1"
+kotlinVersion = "2.1.10"
+kspVersion = "2.1.10-1.0.30"
+kotlinxCoroutinesAndroid = "1.10.1"
+kotlinxCoroutinesCore = "1.10.1"
+lifecycleRuntimeKtx = "2.8.7"
 lottieCompose = "6.4.0"
-navigationCompose = "2.7.7"
-roomCompiler = "2.6.1"
-roomKtx = "2.6.1"
-roomRuntime = "2.6.1"
+navigationCompose = "2.8.9"
+roomCompiler = "2.7.0"
+roomKtx = "2.7.0"
+roomRuntime = "2.7.0"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
@@ -49,5 +49,6 @@ lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinVersion" }
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlinVersion" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroid" }
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspVersion" }
