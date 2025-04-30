@@ -7,17 +7,17 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.rkbapps.makautsgpaygpacalculator.screens.about.AboutScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.dgpa.DgpaCalculatorScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.history.HistoryScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.history.dgpa.DgpaMarksHistoryScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.history.midsem.MidSemCalculationHistoryScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.history.yearly.YearlyMarksHistoryScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.history.ygpa.SgpaYgpaHistoryScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.midsem.MidSemCalculatorScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.yearly.YearlyMarksConverterScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.ygpa.SgpaYgpaPersentageCalculatorScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.about.AboutScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.dgpa.DgpaCalculatorScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.HistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.dgpa.DgpaMarksHistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.midsem.MidSemCalculationHistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.yearly.YearlyMarksHistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.ygpa.SgpaYgpaHistoryScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.midsem.MidSemCalculatorScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.yearly.YearlyMarksConverterScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.ygpa.SgpaYgpaPersentageCalculatorScreen
 
 
 /**
