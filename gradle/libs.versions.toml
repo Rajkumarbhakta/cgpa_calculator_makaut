@@ -16,7 +16,7 @@ lifecycleRuntimeKtx = "2.8.7"
 lottieCompose = "6.6.2"
 navigationCompose = "2.8.9"
 roomCompiler = "2.7.1"
-kotlinx-serialization = "1.8.0"
+kotlinx-serialization = "1.8.1"
 
 [libraries]
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activityCompose" }
