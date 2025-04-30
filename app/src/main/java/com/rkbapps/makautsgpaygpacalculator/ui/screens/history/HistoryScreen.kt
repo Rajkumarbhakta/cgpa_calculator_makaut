@@ -20,9 +20,9 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.rkbapps.makautsgpaygpacalculator.R
 import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenItem
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenListItems
-import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 
 @Composable
 fun HistoryScreen(navController: NavHostController) {
@@ -32,22 +32,22 @@ fun HistoryScreen(navController: NavHostController) {
             HomeScreenItem(
                 title = "Yearly Marks % Convert",
                 subTitle = "Get All History of Yearly Marks % Convert",
-                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksHistory)}
+                onClick = { navController.navigate(route = NavigationRoute.YearlyMarksHistory) }
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Get All History of Mid Sem % Calculator",
-                onClick = {navController.navigate(route = NavigationRoute.MidSemHistory)}
+                onClick = { navController.navigate(route = NavigationRoute.MidSemHistory) }
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Get All History of DGPA % Calculate from SGPA",
-                onClick = {navController.navigate(route = NavigationRoute.DgpaHistory)}
+                onClick = { navController.navigate(route = NavigationRoute.DgpaHistory) }
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
                 subTitle = "Get All History of SGPA/YGPA to % Calculator",
-                onClick = {navController.navigate(route = NavigationRoute.SgpaYgpaPercentageHistory)}
+                onClick = { navController.navigate(route = NavigationRoute.SgpaYgpaPercentageHistory) }
             ),
 
             )
@@ -57,14 +57,19 @@ fun HistoryScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             AppTopBar(
-                showBack = true){
+                showBack = true
+            ) {
                 navController.navigateUp()
             }
         }
-    ) {innerPadding ->
-        Column (modifier = Modifier.padding(innerPadding).padding(horizontal = 16.dp, vertical = 8.dp),
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally){
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
 
             LottieAnimation(
                 composition = composition,
@@ -74,8 +79,11 @@ fun HistoryScreen(navController: NavHostController) {
                     .padding(horizontal = 16.dp)
             )
 
-            LazyColumn(modifier = Modifier.weight(0.5f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-                items(historyItems){
+            LazyColumn(
+                modifier = Modifier.weight(0.5f),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(historyItems) {
                     HomeScreenListItems(item = it)
                 }
             }
