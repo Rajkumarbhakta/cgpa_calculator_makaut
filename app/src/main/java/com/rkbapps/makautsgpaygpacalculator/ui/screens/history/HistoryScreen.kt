@@ -56,12 +56,13 @@ fun HistoryScreen(navController: NavHostController) {
 
     Scaffold(
         topBar = {
-            AppTopBar(showBack = true){
+            AppTopBar(
+                showBack = true){
                 navController.navigateUp()
             }
         }
     ) {innerPadding ->
-        Column (modifier = Modifier.padding(innerPadding),
+        Column (modifier = Modifier.padding(innerPadding).padding(horizontal = 16.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally){
 
@@ -73,13 +74,11 @@ fun HistoryScreen(navController: NavHostController) {
                     .padding(horizontal = 16.dp)
             )
 
-            LazyColumn(modifier = Modifier.weight(0.5f)) {
+            LazyColumn(modifier = Modifier.weight(0.5f), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 items(historyItems){
                     HomeScreenListItems(item = it)
                 }
             }
-
-
         }
     }
 
