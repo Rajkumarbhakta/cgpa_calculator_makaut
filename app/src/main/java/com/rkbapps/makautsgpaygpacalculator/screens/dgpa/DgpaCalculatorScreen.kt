@@ -40,6 +40,7 @@ import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarksTypes
 import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreenTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
+import java.util.Locale
 
 @Composable
 fun DgpaCalculatorScreen(navController: NavHostController) {
@@ -360,7 +361,7 @@ fun FourYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
                                 eighthSemester.value.toDouble())/2
                         val total = ygpa1 + ygpa2 + (1.5 * ygpa3) + (1.5 * ygpa4)
                         val average = total / 5
-                        overallDgpa.doubleValue = String.format("%.2f", average).toDouble()
+                        overallDgpa.doubleValue = String.format(locale = Locale.getDefault(),"%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
                         viewModel.insert(
                             DgpaMidSemMarks(

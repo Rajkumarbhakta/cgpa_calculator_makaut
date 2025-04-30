@@ -3,6 +3,7 @@ package com.rkbapps.makautsgpaygpacalculator.navigation
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -15,205 +16,101 @@ import com.rkbapps.makautsgpaygpacalculator.screens.history.yearly.YearlyMarksHi
 import com.rkbapps.makautsgpaygpacalculator.screens.history.ygpa.SgpaYgpaHistoryScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.midsem.MidSemCalculatorScreen
-import com.rkbapps.makautsgpaygpacalculator.screens.ygpa.SgpaYgpaPersentageCalculatorScreen
 import com.rkbapps.makautsgpaygpacalculator.screens.yearly.YearlyMarksConverterScreen
+import com.rkbapps.makautsgpaygpacalculator.screens.ygpa.SgpaYgpaPersentageCalculatorScreen
 
+
+/**
+ * This function is used to create the navigation graph for the app.
+ * It contains all the composable functions for the app screens.
+ *
+ * @param navController The NavHostController used to navigate between screens.
+ */
 @Composable
 fun NavGraph(navController: NavHostController) {
+    NavHost(
+        navController = navController,
+        startDestination = NavigationRoute.Home,
+        popEnterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        },
+        popExitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        },
+        enterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Left,
+                animationSpec = tween(700)
+            )
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.Right,
+                animationSpec = tween(700)
+            )
+        }
+    ) {
+        mainNavGraph(navController = navController)
+        historyNavGraph(navController = navController)
+    }
+}
 
-    NavHost(navController = navController,
-        startDestination = NavigationRoute.Home.route,
-        ) {
-        composable(route = NavigationRoute.Home.route) {
-            HomeScreen(navController = navController)
-        }
-        composable(route = NavigationRoute.YearlyMarksCalculator.route,
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            },
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            }
-            ) {
-            YearlyMarksConverterScreen(navController = navController)
-        }
-        composable(route = NavigationRoute.DgpaCalculator.route,
 
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            },
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            }
-            ) {
-            DgpaCalculatorScreen(navController = navController)
-        }
-        composable(route = NavigationRoute.MidSemCalculator.route,
+/**
+ * This function is used to create the navigation graph for the history screens.
+ * It contains all the composable functions for the history screens.
+ *
+ * @param navController The NavHostController used to navigate between screens.
+ */
+fun NavGraphBuilder.historyNavGraph(navController: NavHostController) {
+    composable<NavigationRoute.History>() {
+        HistoryScreen(navController)
+    }
+    composable<NavigationRoute.YearlyMarksHistory>() {
+        YearlyMarksHistoryScreen(navController)
+    }
+    composable<NavigationRoute.SgpaYgpaPercentageHistory>() {
+        SgpaYgpaHistoryScreen(navController = navController)
+    }
+    composable<NavigationRoute.MidSemHistory>() {
+        MidSemCalculationHistoryScreen(navController = navController)
+    }
+    composable<NavigationRoute.DgpaHistory>() {
+        DgpaMarksHistoryScreen(navController = navController)
+    }
+}
 
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            },
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            }
-            ) {
-            MidSemCalculatorScreen(navController = navController)
-        }
-        composable(route = NavigationRoute.SgpaYgpaPersentageCalculator.route,
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            },
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            }
-            ) {
-            SgpaYgpaPersentageCalculatorScreen(navController = navController)
-        }
-        composable(route = NavigationRoute.AboutUs.route,
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            },
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            }
-            ){
-            AboutScreen()
-        }
 
-        composable(route = NavigationRoute.History.route,
-            popEnterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            popExitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            },
-            enterTransition = {
-                slideIntoContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Left,
-                    animationSpec = tween(700)
-                )
-            },
-            exitTransition = {
-                slideOutOfContainer(
-                    AnimatedContentTransitionScope.SlideDirection.Right,
-                    animationSpec = tween(700)
-                )
-            }
-        ){
-            HistoryScreen(navController)
-        }
-
-        composable(route=NavigationRoute.YearlyMarksHistory.route){
-            YearlyMarksHistoryScreen(navController)
-        }
-        
-        composable(route=NavigationRoute.SgpaYgpaPercentageHistory.route){
-            SgpaYgpaHistoryScreen(navController = navController)
-        }
-        composable(route=NavigationRoute.MidSemHistory.route){
-            MidSemCalculationHistoryScreen(navController = navController)
-        }
-        
-        composable(route=NavigationRoute.DgpaHistory.route){
-            DgpaMarksHistoryScreen(navController = navController)
-        }
-
+/**
+ * This function is used to create the main navigation graph for the app.
+ * It contains all the composable functions for the main screens.
+ *
+ * @param navController The NavHostController used to navigate between screens.
+ */
+fun NavGraphBuilder.mainNavGraph(navController:NavHostController){
+    composable<NavigationRoute.Home>() {
+        HomeScreen(navController = navController)
+    }
+    composable<NavigationRoute.YearlyMarksCalculator>() {
+        YearlyMarksConverterScreen(navController = navController)
+    }
+    composable<NavigationRoute.DgpaCalculator>() {
+        DgpaCalculatorScreen(navController = navController)
+    }
+    composable<NavigationRoute.MidSemCalculator>() {
+        MidSemCalculatorScreen(navController = navController)
+    }
+    composable<NavigationRoute.SgpaYgpaPercentageCalculator>() {
+        SgpaYgpaPersentageCalculatorScreen(navController = navController)
+    }
+    composable<NavigationRoute.AboutUs>() {
+        AboutScreen()
     }
 }
 

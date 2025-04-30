@@ -3,16 +3,18 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.devtools.ksp)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
     namespace = "com.rkbapps.makautsgpaygpacalculator"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.rkbapps.makautsgpaygpacalculator"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 6
         versionName = "2.4"
 
@@ -32,18 +34,15 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
         buildConfig = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.14"
     }
     packaging {
         resources {
@@ -85,5 +84,8 @@ dependencies {
     implementation (libs.androidx.room.runtime)
     ksp (libs.androidx.room.compiler)
     implementation (libs.androidx.room.ktx)
+
+    //serialization
+    implementation(libs.kotlinx.serialization.json)
 
 }

@@ -22,6 +22,8 @@ import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
@@ -47,31 +49,28 @@ fun HomeScreen(navController: NavHostController) {
             HomeScreenItem(
                 title = "Yearly Marks % Convert",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksCalculator.route)}
+                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksCalculator)}
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.MidSemCalculator.route)}
+                onClick = {navController.navigate(route = NavigationRoute.MidSemCalculator)}
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.DgpaCalculator.route)}
+                onClick = {navController.navigate(route = NavigationRoute.DgpaCalculator)}
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.SgpaYgpaPersentageCalculator.route)}
+                onClick = {navController.navigate(route = NavigationRoute.SgpaYgpaPercentageCalculator)}
             ),
             HomeScreenItem(
                 title = "History",
                 subTitle = "Check your calculation history.",
-                onClick = {navController.navigate(route = NavigationRoute.History.route)}
+                onClick = {navController.navigate(route = NavigationRoute.History)}
             ),
-
-
-
         )
 
     }
@@ -207,6 +206,8 @@ fun HomeScreenRowItems(
     }
 }
 
+@Immutable
+@Stable
 data class HomeScreenItem(
     val title: String,
     val subTitle: String,

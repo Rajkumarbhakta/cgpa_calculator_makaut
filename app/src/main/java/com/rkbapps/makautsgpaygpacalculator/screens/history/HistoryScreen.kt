@@ -32,22 +32,22 @@ fun HistoryScreen(navController: NavHostController) {
             HomeScreenItem(
                 title = "Yearly Marks % Convert",
                 subTitle = "Get All History of Yearly Marks % Convert",
-                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksHistory.route)}
+                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksHistory)}
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Get All History of Mid Sem % Calculator",
-                onClick = {navController.navigate(route = NavigationRoute.MidSemHistory.route)}
+                onClick = {navController.navigate(route = NavigationRoute.MidSemHistory)}
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Get All History of DGPA % Calculate from SGPA",
-                onClick = {navController.navigate(route = NavigationRoute.DgpaHistory.route)}
+                onClick = {navController.navigate(route = NavigationRoute.DgpaHistory)}
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
                 subTitle = "Get All History of SGPA/YGPA to % Calculator",
-                onClick = {navController.navigate(route = NavigationRoute.SgpaYgpaPercentageHistory.route)}
+                onClick = {navController.navigate(route = NavigationRoute.SgpaYgpaPercentageHistory)}
             ),
 
             )
