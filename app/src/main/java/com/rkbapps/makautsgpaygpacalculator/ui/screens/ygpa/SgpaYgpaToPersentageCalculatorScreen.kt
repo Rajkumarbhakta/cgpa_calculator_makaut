@@ -33,11 +33,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.GpaPercentage
-import com.rkbapps.makautsgpaygpacalculator.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
-fun SgpaYgpaPersentageCalculatorScreen(navController: NavHostController) {
+fun SgpaYgpaPercentageCalculatorScreen(navController: NavHostController) {
 
     val context = LocalContext.current
     val viewModel:SgpaYgpaPercentageViewModel = hiltViewModel()

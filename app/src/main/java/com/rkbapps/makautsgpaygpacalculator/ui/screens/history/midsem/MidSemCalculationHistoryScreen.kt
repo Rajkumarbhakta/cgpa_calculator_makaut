@@ -37,8 +37,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
-import com.rkbapps.makautsgpaygpacalculator.screens.home.AppTopBar
-import com.rkbapps.makautsgpaygpacalculator.screens.midsem.Options
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.midsem.Options
 import com.rkbapps.makautsgpaygpacalculator.utils.Constant
 import java.text.SimpleDateFormat
 import java.util.Locale

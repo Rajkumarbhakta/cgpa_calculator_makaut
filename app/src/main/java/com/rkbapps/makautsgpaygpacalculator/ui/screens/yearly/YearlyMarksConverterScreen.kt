@@ -36,7 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.YearlyMarks
-import com.rkbapps.makautsgpaygpacalculator.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateObtainedNumber
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateTotalNumber
@@ -95,6 +95,7 @@ fun YearlyMarksConverterScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .padding(it)
+                .padding(vertical = 8.dp, horizontal = 16.dp)
                 .verticalScroll(rememberScrollState())
         ) {
 

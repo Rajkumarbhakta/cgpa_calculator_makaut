@@ -17,7 +17,7 @@ import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.ygpa.SgpaYgpaHist
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreen
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.midsem.MidSemCalculatorScreen
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.yearly.YearlyMarksConverterScreen
-import com.rkbapps.makautsgpaygpacalculator.ui.screens.ygpa.SgpaYgpaPersentageCalculatorScreen
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.ygpa.SgpaYgpaPercentageCalculatorScreen
 
 
 /**
@@ -107,7 +107,7 @@ fun NavGraphBuilder.mainNavGraph(navController:NavHostController){
         MidSemCalculatorScreen(navController = navController)
     }
     composable<NavigationRoute.SgpaYgpaPercentageCalculator>() {
-        SgpaYgpaPersentageCalculatorScreen(navController = navController)
+        SgpaYgpaPercentageCalculatorScreen(navController = navController)
     }
     composable<NavigationRoute.AboutUs>() {
         AboutScreen()

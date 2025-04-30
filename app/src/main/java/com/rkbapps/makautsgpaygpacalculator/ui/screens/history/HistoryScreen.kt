@@ -20,9 +20,9 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.rkbapps.makautsgpaygpacalculator.R
 import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute
-import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreenItem
-import com.rkbapps.makautsgpaygpacalculator.screens.home.HomeScreenListItems
-import com.rkbapps.makautsgpaygpacalculator.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenItem
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenListItems
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 
 @Composable
 fun HistoryScreen(navController: NavHostController) {

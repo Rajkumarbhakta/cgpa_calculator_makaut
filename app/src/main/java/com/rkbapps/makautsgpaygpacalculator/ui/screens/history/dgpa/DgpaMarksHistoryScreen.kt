@@ -30,8 +30,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import com.rkbapps.makautsgpaygpacalculator.screens.history.midsem.MidSemHistoryItem
-import com.rkbapps.makautsgpaygpacalculator.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.midsem.MidSemHistoryItem
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 
 @Composable
 fun DgpaMarksHistoryScreen (navController: NavHostController){
