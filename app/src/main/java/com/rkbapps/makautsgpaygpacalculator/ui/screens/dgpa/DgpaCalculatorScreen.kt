@@ -43,9 +43,8 @@ import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import java.util.Locale
 
 @Composable
-fun DgpaCalculatorScreen(navController: NavHostController) {
+fun DgpaCalculatorScreen(navController: NavHostController,viewModel:DgpaCalculatorViewModel = hiltViewModel()) {
     val context = LocalContext.current
-    val viewModel:DgpaCalculatorViewModel = hiltViewModel()
     val selectedItem = rememberSaveable {
         mutableStateOf(CourseType.FOUR_YEAR_DEGREE)
     }
@@ -55,7 +54,7 @@ fun DgpaCalculatorScreen(navController: NavHostController) {
             navController.navigateUp()
         }
     }) {
-        Column(modifier = Modifier.padding(it)) {
+        Column(modifier = Modifier.padding(it).padding(horizontal = 16.dp, vertical = 8.dp)) {
             Text(
                 text = "Choose your course duration:",
                 style = MaterialTheme.typography.titleMedium,

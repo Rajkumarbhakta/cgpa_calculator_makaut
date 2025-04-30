@@ -50,27 +50,27 @@ fun HomeScreen(navController: NavHostController) {
             HomeScreenItem(
                 title = "Yearly Marks % Convert",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.YearlyMarksCalculator)}
+                onClick = { navController.navigate(route = NavigationRoute.YearlyMarksCalculator) }
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.MidSemCalculator)}
+                onClick = { navController.navigate(route = NavigationRoute.MidSemCalculator) }
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.DgpaCalculator)}
+                onClick = { navController.navigate(route = NavigationRoute.DgpaCalculator) }
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
                 subTitle = "Calculate marks for a specific year",
-                onClick = {navController.navigate(route = NavigationRoute.SgpaYgpaPercentageCalculator)}
+                onClick = { navController.navigate(route = NavigationRoute.SgpaYgpaPercentageCalculator) }
             ),
             HomeScreenItem(
                 title = "History",
                 subTitle = "Check your calculation history.",
-                onClick = {navController.navigate(route = NavigationRoute.History)}
+                onClick = { navController.navigate(route = NavigationRoute.History) }
             ),
         )
 
@@ -80,16 +80,25 @@ fun HomeScreen(navController: NavHostController) {
             AppTopBar()
         },
     ) { paddingValues ->
-        Column(modifier = Modifier.padding(paddingValues)) {
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(vertical = 8.dp, horizontal = 16.dp)
+        ) {
 
             LottieAnimation(
                 composition = composition,
                 iterations = LottieConstants.IterateForever,
-                modifier = Modifier.weight(1f).padding(horizontal = 16.dp)
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(horizontal = 16.dp)
             )
 
-            LazyColumn {
-                items(homeItems){
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                items(homeItems) {
                     HomeScreenListItems(item = it)
                 }
             }
@@ -142,12 +151,10 @@ fun AppTopBar(
 
 @Composable
 fun HomeScreenListItems(
-   item: HomeScreenItem
+    item: HomeScreenItem
 ) {
-
     OutlinedCard(
         onClick = { item.onClick.invoke() },
-        modifier = Modifier.padding(horizontal = 16.dp, vertical = 5.dp)
     ) {
         Column(
             verticalArrangement = Arrangement.Center,

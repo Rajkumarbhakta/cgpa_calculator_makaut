@@ -37,10 +37,10 @@ import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
-fun SgpaYgpaPercentageCalculatorScreen(navController: NavHostController) {
+fun SgpaYgpaPercentageCalculatorScreen(navController: NavHostController,viewModel:SgpaYgpaPercentageViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
-    val viewModel:SgpaYgpaPercentageViewModel = hiltViewModel()
+
     val cgpaYgpa = rememberSaveable {
         mutableStateOf("")
     }
@@ -56,6 +56,7 @@ fun SgpaYgpaPercentageCalculatorScreen(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .padding(it)
+                .padding(horizontal = 16.dp, vertical = 8.dp)
                 .verticalScroll(rememberScrollState())
         ) {
             if (cgpaYgpa.value.isEmpty()) {

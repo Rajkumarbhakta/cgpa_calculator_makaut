@@ -21,17 +21,20 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rkbapps.makautsgpaygpacalculator.BuildConfig
 import com.rkbapps.makautsgpaygpacalculator.R
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 
 
 @Composable
 fun AboutScreen() {
 
     Scaffold(topBar = {
-
-        AboutScreenTopBar()
-
+        AppTopBar(
+            title = "About",
+            showBack = true,
+            onBackClick = { /* Handle back click */ }
+        )
     }) {
-        Column(modifier = Modifier.padding(it)) {
+        Column(modifier = Modifier.padding(it).padding(horizontal = 16.dp, vertical = 8.dp)) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -87,28 +90,6 @@ fun AboutScreen() {
             }
 
         }
-    }
-
-}
-
-@Composable
-fun AboutScreenTopBar() {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 8.dp),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center
-    ) {
-        Text(
-            text = "About",
-            modifier = Modifier
-                .weight(1f)
-                .padding(5.dp),
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.onSurface,
-            textAlign = TextAlign.Center
-        )
     }
 
 }
