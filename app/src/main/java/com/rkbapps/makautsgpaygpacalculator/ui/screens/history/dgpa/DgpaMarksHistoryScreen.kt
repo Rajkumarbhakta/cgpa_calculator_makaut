@@ -25,6 +25,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -34,7 +35,7 @@ import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.midsem.MidSemHist
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 
 @Composable
-fun DgpaMarksHistoryScreen (navController: NavHostController){
+fun DgpaMarksHistoryScreen (navController: NavHostController?=null,backStack: SnapshotStateList<Any>){
     val viewModel:DgpaMarksHistoryViewModel = hiltViewModel()
     val dgpaHistory = viewModel.dgpaHistory.collectAsState()
 
@@ -57,7 +58,7 @@ fun DgpaMarksHistoryScreen (navController: NavHostController){
     Scaffold(
         topBar = {
             AppTopBar(showBack = true){
-                navController.navigateUp()
+                navController?.navigateUp()
             }
         }
     ) {paddingValues ->

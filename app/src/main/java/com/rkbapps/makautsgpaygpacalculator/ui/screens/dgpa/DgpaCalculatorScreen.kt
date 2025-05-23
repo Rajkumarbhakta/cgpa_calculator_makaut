@@ -28,6 +28,7 @@ import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -43,7 +44,8 @@ import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import java.util.Locale
 
 @Composable
-fun DgpaCalculatorScreen(navController: NavHostController,viewModel:DgpaCalculatorViewModel = hiltViewModel()) {
+fun DgpaCalculatorScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
+                         viewModel:DgpaCalculatorViewModel = hiltViewModel()) {
     val context = LocalContext.current
     val selectedItem = rememberSaveable {
         mutableStateOf(CourseType.FOUR_YEAR_DEGREE)
@@ -51,7 +53,8 @@ fun DgpaCalculatorScreen(navController: NavHostController,viewModel:DgpaCalculat
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-            navController.navigateUp()
+//            navController?.navigateUp()
+            backStack.removeLastOrNull()
         }
     }) {
         Column(modifier = Modifier.padding(it).padding(horizontal = 16.dp, vertical = 8.dp)) {

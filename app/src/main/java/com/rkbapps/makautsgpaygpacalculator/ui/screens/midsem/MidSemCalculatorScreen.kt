@@ -31,6 +31,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -47,7 +48,7 @@ import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
 fun MidSemCalculatorScreen(
-    navController: NavHostController,
+    navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
     viewModel: MidSemCalculatorViewModel = hiltViewModel()
 ) {
 
@@ -95,7 +96,8 @@ fun MidSemCalculatorScreen(
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-            navController.navigateUp()
+//            navController?.navigateUp()
+            backStack.removeLastOrNull()
         }
     }) {
         Column(

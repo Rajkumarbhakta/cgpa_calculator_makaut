@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -43,7 +44,7 @@ import com.rkbapps.makautsgpaygpacalculator.utils.calculateTotalNumber
 
 @Composable
 fun YearlyMarksConverterScreen(
-    navController: NavHostController,
+    navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
     viewModel: YearlyMarksViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -91,7 +92,8 @@ fun YearlyMarksConverterScreen(
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-            navController.navigateUp()
+//            navController?.navigateUp()
+            backStack.removeLastOrNull()
         }
     }) {
         Column(

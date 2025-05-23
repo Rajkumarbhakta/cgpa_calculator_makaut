@@ -10,7 +10,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SgpaYgpaHistoryViewModel @Inject constructor(private val repository: com.rkbapps.makautsgpaygpacalculator.ui.screens.history.ygpa.SgpaYgpaHistoryRepository):ViewModel() {
+class SgpaYgpaHistoryViewModel @Inject constructor(private val repository: SgpaYgpaHistoryRepository):ViewModel() {
     val sgpaYgpaHistory: StateFlow<List<GpaPercentage>> = repository.sgpaYgpaHistory
 
 

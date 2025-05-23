@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -25,29 +26,37 @@ import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenItem
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenListItems
 
 @Composable
-fun HistoryScreen(navController: NavHostController) {
+fun HistoryScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.history))
     val historyItems = remember {
         mutableStateListOf(
             HomeScreenItem(
                 title = "Yearly Marks % Convert",
                 subTitle = "Get All History of Yearly Marks % Convert",
-                onClick = { navController.navigate(route = NavigationRoute.YearlyMarksHistory) }
+                onClick = {
+                    backStack.add(NavigationRoute.YearlyMarksHistory)
+                    navController?.navigate(route = NavigationRoute.YearlyMarksHistory) }
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Get All History of Mid Sem % Calculator",
-                onClick = { navController.navigate(route = NavigationRoute.MidSemHistory) }
+                onClick = {
+                    backStack.add(NavigationRoute.MidSemHistory)
+                    navController?.navigate(route = NavigationRoute.MidSemHistory) }
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Get All History of DGPA % Calculate from SGPA",
-                onClick = { navController.navigate(route = NavigationRoute.DgpaHistory) }
+                onClick = {
+                    backStack.add(NavigationRoute.DgpaHistory)
+                    navController?.navigate(route = NavigationRoute.DgpaHistory) }
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
                 subTitle = "Get All History of SGPA/YGPA to % Calculator",
-                onClick = { navController.navigate(route = NavigationRoute.SgpaYgpaPercentageHistory) }
+                onClick = {
+                    backStack.add(NavigationRoute.SgpaYgpaPercentageHistory)
+                    navController?.navigate(route = NavigationRoute.SgpaYgpaPercentageHistory) }
             ),
 
             )
@@ -59,7 +68,8 @@ fun HistoryScreen(navController: NavHostController) {
             AppTopBar(
                 showBack = true
             ) {
-                navController.navigateUp()
+                backStack.removeLastOrNull()
+                navController?.navigateUp()
             }
         }
     ) { innerPadding ->

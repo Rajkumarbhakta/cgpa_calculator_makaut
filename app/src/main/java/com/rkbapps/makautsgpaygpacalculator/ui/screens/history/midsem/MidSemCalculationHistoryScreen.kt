@@ -31,6 +31,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -44,7 +45,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun MidSemCalculationHistoryScreen(navController: NavHostController) {
+fun MidSemCalculationHistoryScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
     val viewModel:MidSemCalculationHistoryViewModel = hiltViewModel()
     val midSemHistory = viewModel.midSemHistory.collectAsState()
 
@@ -67,7 +68,7 @@ fun MidSemCalculationHistoryScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
             AppTopBar(showBack = true){
-                navController.navigateUp()
+                navController?.navigateUp()
             }
         }
     ) {paddingValues ->

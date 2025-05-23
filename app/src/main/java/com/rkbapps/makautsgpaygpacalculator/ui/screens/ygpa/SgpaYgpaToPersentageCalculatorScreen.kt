@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -37,7 +38,9 @@ import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
-fun SgpaYgpaPercentageCalculatorScreen(navController: NavHostController,viewModel:SgpaYgpaPercentageViewModel = hiltViewModel()) {
+fun SgpaYgpaPercentageCalculatorScreen(
+    navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
+                                       viewModel:SgpaYgpaPercentageViewModel = hiltViewModel()) {
 
     val context = LocalContext.current
 
@@ -50,7 +53,8 @@ fun SgpaYgpaPercentageCalculatorScreen(navController: NavHostController,viewMode
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-            navController.navigateUp()
+//            navController?.navigateUp()
+            backStack.removeLastOrNull()
         }
     }) {
         Column(

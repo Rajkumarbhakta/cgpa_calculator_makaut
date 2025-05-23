@@ -30,6 +30,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -43,7 +44,7 @@ import java.util.Locale
 
 
 @Composable
-fun SgpaYgpaHistoryScreen(navController:NavHostController) {
+fun SgpaYgpaHistoryScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
     val viewModel: SgpaYgpaHistoryViewModel = hiltViewModel()
     val sgpaYgpaHistory = viewModel.sgpaYgpaHistory.collectAsState()
 
@@ -66,7 +67,7 @@ fun SgpaYgpaHistoryScreen(navController:NavHostController) {
     Scaffold(
         topBar = {
             AppTopBar(showBack = true){
-                navController.navigateUp()
+                navController?.navigateUp()
             }
         }
     ) {paddingValues ->

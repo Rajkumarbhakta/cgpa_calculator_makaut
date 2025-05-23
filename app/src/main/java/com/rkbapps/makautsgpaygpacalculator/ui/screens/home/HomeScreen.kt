@@ -28,6 +28,7 @@ import androidx.compose.runtime.Stable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -43,34 +44,48 @@ import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute
 
 
 @Composable
-fun HomeScreen(navController: NavHostController) {
+fun HomeScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.study))
     val homeItems = remember {
         mutableStateListOf(
             HomeScreenItem(
                 title = "Yearly Marks % Convert",
                 subTitle = "Calculate marks for a specific year",
-                onClick = { navController.navigate(route = NavigationRoute.YearlyMarksCalculator) }
+                onClick = {
+                    backStack.add(NavigationRoute.YearlyMarksCalculator)
+//                    navController?.navigate(route = NavigationRoute.YearlyMarksCalculator)
+                }
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Calculate marks for a specific year",
-                onClick = { navController.navigate(route = NavigationRoute.MidSemCalculator) }
+                onClick = {
+                    backStack.add(NavigationRoute.MidSemCalculator)
+//                    navController?.navigate(route = NavigationRoute.MidSemCalculator)
+                }
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Calculate marks for a specific year",
-                onClick = { navController.navigate(route = NavigationRoute.DgpaCalculator) }
+                onClick = {
+                    navController?.navigate(route = NavigationRoute.DgpaCalculator)
+                }
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
                 subTitle = "Calculate marks for a specific year",
-                onClick = { navController.navigate(route = NavigationRoute.SgpaYgpaPercentageCalculator) }
+                onClick = {
+                    backStack.add(NavigationRoute.SgpaYgpaPercentageCalculator)
+//                    navController?.navigate(route = NavigationRoute.SgpaYgpaPercentageCalculator)
+                }
             ),
             HomeScreenItem(
                 title = "History",
                 subTitle = "Check your calculation history.",
-                onClick = { navController.navigate(route = NavigationRoute.History) }
+                onClick = {
+                    backStack.add(NavigationRoute.History)
+//                    navController?.navigate(route = NavigationRoute.History)
+                }
             ),
         )
 
