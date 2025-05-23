@@ -3,7 +3,6 @@ package com.rkbapps.makautsgpaygpacalculator.ui.screens.about
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -34,7 +33,9 @@ fun AboutScreen() {
             onBackClick = { /* Handle back click */ }
         )
     }) {
-        Column(modifier = Modifier.padding(it).padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Column(modifier = Modifier
+            .padding(it)
+            .padding(horizontal = 16.dp, vertical = 8.dp)) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

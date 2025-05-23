@@ -10,7 +10,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class YearlyMarksHistoryViewModel @Inject constructor(private val repository: YearlyMarksHistoryRepository) : ViewModel() {
+class YearlyMarksHistoryViewModel @Inject constructor(private val repository: YearlyMarksHistoryRepository) :
+    ViewModel() {
 
     val yearlyCalculatedMarks: StateFlow<List<YearlyMarks>> = repository.yearlyCalculatedMarks
 
@@ -38,7 +39,7 @@ class YearlyMarksHistoryViewModel @Inject constructor(private val repository: Ye
         }
     }
 
-    fun clearHistory(){
+    fun clearHistory() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.clearHistory()
         }

@@ -5,24 +5,34 @@ import kotlinx.serialization.Serializable
 sealed class NavigationRoute() {
     @Serializable
     data object Home : NavigationRoute()
+
     @Serializable
     data object YearlyMarksCalculator : NavigationRoute()
+
     @Serializable
     data object MidSemCalculator : NavigationRoute()
+
     @Serializable
     data object DgpaCalculator : NavigationRoute()
+
     @Serializable
     data object SgpaYgpaPercentageCalculator : NavigationRoute()
+
     @Serializable
-    data object AboutUs:NavigationRoute()
+    data object AboutUs : NavigationRoute()
+
     @Serializable
-    data object History:NavigationRoute()
+    data object History : NavigationRoute()
+
     @Serializable
-    data object YearlyMarksHistory:NavigationRoute()
+    data object YearlyMarksHistory : NavigationRoute()
+
     @Serializable
-    data object SgpaYgpaPercentageHistory:NavigationRoute()
+    data object SgpaYgpaPercentageHistory : NavigationRoute()
+
     @Serializable
-    data object MidSemHistory:NavigationRoute()
+    data object MidSemHistory : NavigationRoute()
+
     @Serializable
-    data object DgpaHistory:NavigationRoute()
+    data object DgpaHistory : NavigationRoute()
 }

@@ -45,8 +45,10 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun MidSemCalculationHistoryScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
-    val viewModel:MidSemCalculationHistoryViewModel = hiltViewModel()
+fun MidSemCalculationHistoryScreen(
+    backStack: SnapshotStateList<Any>
+) {
+    val viewModel: MidSemCalculationHistoryViewModel = hiltViewModel()
     val midSemHistory = viewModel.midSemHistory.collectAsState()
 
     val isDescOrdered = rememberSaveable {
@@ -58,36 +60,40 @@ fun MidSemCalculationHistoryScreen(navController: NavHostController?=null,backSt
     }
 
     LaunchedEffect(key1 = isDescOrdered.value) {
-        if (isDescOrdered.value){
+        if (isDescOrdered.value) {
             viewModel.getHistoryInDesc()
-        }else{
+        } else {
             viewModel.getHistoryInAsc()
         }
     }
 
     Scaffold(
         topBar = {
-            AppTopBar(showBack = true){
-                navController?.navigateUp()
+            AppTopBar(showBack = true) {
+                backStack.removeLastOrNull()
             }
         }
-    ) {paddingValues ->
+    ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp,),
+                    .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween){
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(text = "History", style = MaterialTheme.typography.titleLarge)
-                Row (
+                Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     IconButton(onClick = {
                         isDescOrdered.value = !isDescOrdered.value
                     }) {
-                        Icon(imageVector = if (isDescOrdered.value) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp, contentDescription = "ace and dec")
+                        Icon(
+                            imageVector = if (isDescOrdered.value) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+                            contentDescription = "ace and dec"
+                        )
                     }
 
                     Spacer(modifier = Modifier.width(10.dp))
@@ -95,7 +101,10 @@ fun MidSemCalculationHistoryScreen(navController: NavHostController?=null,backSt
                     IconButton(onClick = {
                         isClearHistoryDialogVisible.value = true
                     }) {
-                        Icon(imageVector = Icons.Default.Delete, contentDescription = "clear history")
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "clear history"
+                        )
                     }
                 }
             }
@@ -104,11 +113,11 @@ fun MidSemCalculationHistoryScreen(navController: NavHostController?=null,backSt
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp,)
+                        .padding(horizontal = 16.dp)
                 ) {
                     items(count = midSemHistory.value.size, key = {
                         midSemHistory.value[it].id
-                    }){
+                    }) {
 
                         MidSemHistoryItem(item = midSemHistory.value[it]) {
                             viewModel.delete(midSemHistory.value[it])
@@ -117,16 +126,19 @@ fun MidSemCalculationHistoryScreen(navController: NavHostController?=null,backSt
                     }
                 }
 
-            }else{
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(horizontal = 16.dp, vertical = 8.dp), contentAlignment = Alignment.Center){
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(text = "You have no history yet.")
                 }
             }
 
-            if (isClearHistoryDialogVisible.value){
+            if (isClearHistoryDialogVisible.value) {
                 AlertDialog(
                     onDismissRequest = { isClearHistoryDialogVisible.value = false },
                     title = { Text(text = "Clear History") },
@@ -152,12 +164,11 @@ fun MidSemCalculationHistoryScreen(navController: NavHostController?=null,backSt
     }
 
 
-
 }
 
 
 @Composable
-fun MidSemHistoryItem(item:DgpaMidSemMarks,onDeleted:()->Unit) {
+fun MidSemHistoryItem(item: DgpaMidSemMarks, onDeleted: () -> Unit) {
     ElevatedCard(modifier = Modifier.padding(vertical = 5.dp)) {
         Column(modifier = Modifier.padding(8.dp)) {
             OutlinedCard {
@@ -209,7 +220,10 @@ fun MidSemHistoryItem(item:DgpaMidSemMarks,onDeleted:()->Unit) {
                             .padding(8.dp)
                     ) {
                         MidSemHistoryItemRowItem(title = "Average CGPA", value = item.avgGpa)
-                        MidSemHistoryItemRowItem(title = "Average Percentage", value = item.avgPercentage)
+                        MidSemHistoryItemRowItem(
+                            title = "Average Percentage",
+                            value = item.avgPercentage
+                        )
                     }
                 }
             }
@@ -227,15 +241,6 @@ fun MidSemHistoryItem(item:DgpaMidSemMarks,onDeleted:()->Unit) {
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = "Delete")
                     }
-//                    Spacer(modifier = Modifier.width(10.dp))
-//                    TextButton(
-//                        modifier = Modifier.weight(1f),
-//                        onClick = { /*TODO*/ })
-//                    {
-//                    Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "")
-//                    Spacer(modifier = Modifier.width(5.dp))
-//                    Text(text = "Mark Favourite")
-//                    }
                     Spacer(modifier = Modifier.width(10.dp))
 
                     Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
@@ -264,7 +269,7 @@ fun MidSemHistoryItemRowItem(
     Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(text = "$title :", style = MaterialTheme.typography.titleSmall)
         SelectionContainer {
-            Text(text = "$value",)
+            Text(text = "$value")
         }
     }
 }

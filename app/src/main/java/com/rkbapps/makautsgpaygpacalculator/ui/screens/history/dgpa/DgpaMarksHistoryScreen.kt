@@ -30,13 +30,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.history.midsem.MidSemHistoryItem
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 
 @Composable
-fun DgpaMarksHistoryScreen (navController: NavHostController?=null,backStack: SnapshotStateList<Any>){
-    val viewModel:DgpaMarksHistoryViewModel = hiltViewModel()
+fun DgpaMarksHistoryScreen(
+    backStack: SnapshotStateList<Any>
+) {
+    val viewModel: DgpaMarksHistoryViewModel = hiltViewModel()
     val dgpaHistory = viewModel.dgpaHistory.collectAsState()
 
     val isDescOrdered = rememberSaveable {
@@ -48,36 +49,40 @@ fun DgpaMarksHistoryScreen (navController: NavHostController?=null,backStack: Sn
     }
 
     LaunchedEffect(key1 = isDescOrdered.value) {
-        if (isDescOrdered.value){
+        if (isDescOrdered.value) {
             viewModel.getHistoryInDesc()
-        }else{
+        } else {
             viewModel.getHistoryInAsc()
         }
     }
 
     Scaffold(
         topBar = {
-            AppTopBar(showBack = true){
-                navController?.navigateUp()
+            AppTopBar(showBack = true) {
+                backStack.removeLastOrNull()
             }
         }
-    ) {paddingValues ->
+    ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp,),
+                    .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween){
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(text = "History", style = MaterialTheme.typography.titleLarge)
-                Row (
+                Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     IconButton(onClick = {
                         isDescOrdered.value = !isDescOrdered.value
                     }) {
-                        Icon(imageVector = if (isDescOrdered.value) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp, contentDescription = "ace and dec")
+                        Icon(
+                            imageVector = if (isDescOrdered.value) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+                            contentDescription = "ace and dec"
+                        )
                     }
 
                     Spacer(modifier = Modifier.width(10.dp))
@@ -85,7 +90,10 @@ fun DgpaMarksHistoryScreen (navController: NavHostController?=null,backStack: Sn
                     IconButton(onClick = {
                         isClearHistoryDialogVisible.value = true
                     }) {
-                        Icon(imageVector = Icons.Default.Delete, contentDescription = "clear history")
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "clear history"
+                        )
                     }
                 }
             }
@@ -94,11 +102,11 @@ fun DgpaMarksHistoryScreen (navController: NavHostController?=null,backStack: Sn
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp,)
+                        .padding(horizontal = 16.dp)
                 ) {
                     items(count = dgpaHistory.value.size, key = {
                         dgpaHistory.value[it].id
-                    }){
+                    }) {
 
                         MidSemHistoryItem(item = dgpaHistory.value[it]) {
                             viewModel.delete(dgpaHistory.value[it])
@@ -107,16 +115,19 @@ fun DgpaMarksHistoryScreen (navController: NavHostController?=null,backStack: Sn
                     }
                 }
 
-            }else{
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(horizontal = 16.dp, vertical = 8.dp), contentAlignment = Alignment.Center){
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(text = "You have no history yet.")
                 }
             }
 
-            if (isClearHistoryDialogVisible.value){
+            if (isClearHistoryDialogVisible.value) {
                 AlertDialog(
                     onDismissRequest = { isClearHistoryDialogVisible.value = false },
                     title = { Text(text = "Clear History") },

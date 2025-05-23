@@ -10,34 +10,34 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SgpaYgpaHistoryViewModel @Inject constructor(private val repository: SgpaYgpaHistoryRepository):ViewModel() {
+class SgpaYgpaHistoryViewModel @Inject constructor(private val repository: SgpaYgpaHistoryRepository) :
+    ViewModel() {
     val sgpaYgpaHistory: StateFlow<List<GpaPercentage>> = repository.sgpaYgpaHistory
 
 
-    fun getAllByTimeDesc(){
+    fun getAllByTimeDesc() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllSortedByTimeDesc()
         }
     }
 
-    fun getAllByTimeAsc(){
+    fun getAllByTimeAsc() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.getAllSortedByTimeAsc()
         }
     }
 
-    fun delete(gpaPercentage: GpaPercentage){
+    fun delete(gpaPercentage: GpaPercentage) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.delete(gpaPercentage)
         }
     }
 
-    fun deleteAll(){
+    fun deleteAll() {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAll()
         }
     }
-
 
 
 }

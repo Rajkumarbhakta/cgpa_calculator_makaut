@@ -32,15 +32,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.GpaPercentage
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
 fun SgpaYgpaPercentageCalculatorScreen(
-    navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
-                                       viewModel:SgpaYgpaPercentageViewModel = hiltViewModel()) {
+    backStack: SnapshotStateList<Any>,
+    viewModel: SgpaYgpaPercentageViewModel = hiltViewModel()
+) {
 
     val context = LocalContext.current
 
@@ -53,7 +53,6 @@ fun SgpaYgpaPercentageCalculatorScreen(
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-//            navController?.navigateUp()
             backStack.removeLastOrNull()
         }
     }) {
@@ -99,16 +98,18 @@ fun SgpaYgpaPercentageCalculatorScreen(
                                 percentage.doubleValue =
                                     calculatePercentage(cgpaYgpa.value.toDouble())
 
-                                viewModel.insert(GpaPercentage(
-                                    gpa = cgpaYgpa.value.toDouble(),
-                                    percentage = percentage.doubleValue
-                                ))
+                                viewModel.insert(
+                                    GpaPercentage(
+                                        gpa = cgpaYgpa.value.toDouble(),
+                                        percentage = percentage.doubleValue
+                                    )
+                                )
 
                             } else {
                                 Toast.makeText(context, "Enter CGPA/YGPA.", Toast.LENGTH_SHORT)
                                     .show()
                             }
-                        } catch (e: Exception) {
+                        } catch (_: Exception) {
                             Toast.makeText(context, "Enter proper CGPA/YGPA.", Toast.LENGTH_SHORT)
                                 .show()
                         }

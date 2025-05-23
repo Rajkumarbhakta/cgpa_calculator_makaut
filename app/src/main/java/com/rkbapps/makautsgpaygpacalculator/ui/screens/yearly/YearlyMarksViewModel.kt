@@ -10,13 +10,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class YearlyMarksViewModel @Inject constructor(private val yearlyMarksDao: YearlyMarksDao):ViewModel() {
+class YearlyMarksViewModel @Inject constructor(private val yearlyMarksDao: YearlyMarksDao) :
+    ViewModel() {
 
 
-     fun insert(yearlyMarks: YearlyMarks) = viewModelScope.launch(Dispatchers.IO) {
+    fun insert(yearlyMarks: YearlyMarks) = viewModelScope.launch(Dispatchers.IO) {
         yearlyMarksDao.insert(yearlyMarks)
     }
-
 
 
 }

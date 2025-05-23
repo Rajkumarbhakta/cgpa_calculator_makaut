@@ -45,8 +45,10 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 @Composable
-fun YearlyMarksHistoryScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
-    val viewModel:YearlyMarksHistoryViewModel = hiltViewModel()
+fun YearlyMarksHistoryScreen(
+    backStack: SnapshotStateList<Any>
+) {
+    val viewModel: YearlyMarksHistoryViewModel = hiltViewModel()
     val yearlyMarksHistoryList = viewModel.yearlyCalculatedMarks.collectAsState()
 
     val isDescOrdered = rememberSaveable {
@@ -58,36 +60,40 @@ fun YearlyMarksHistoryScreen(navController: NavHostController?=null,backStack: S
     }
 
     LaunchedEffect(key1 = isDescOrdered.value) {
-        if (isDescOrdered.value){
+        if (isDescOrdered.value) {
             viewModel.getAllSortedDesc()
-        }else{
+        } else {
             viewModel.getAllSortedAsc()
         }
     }
 
     Scaffold(
         topBar = {
-            AppTopBar(showBack = true){
-                navController?.navigateUp()
+            AppTopBar(showBack = true) {
+                backStack.removeLastOrNull()
             }
         }
-    ) {paddingValues ->
+    ) { paddingValues ->
         Column(modifier = Modifier.padding(paddingValues)) {
-            Row (
+            Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp,),
+                    .padding(horizontal = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween){
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
                 Text(text = "History", style = MaterialTheme.typography.titleLarge)
-                Row (
+                Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
-                ){
+                ) {
                     IconButton(onClick = {
                         isDescOrdered.value = !isDescOrdered.value
                     }) {
-                        Icon(imageVector = if (isDescOrdered.value)Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp, contentDescription = "ace and dec")
+                        Icon(
+                            imageVector = if (isDescOrdered.value) Icons.Default.KeyboardArrowDown else Icons.Default.KeyboardArrowUp,
+                            contentDescription = "ace and dec"
+                        )
                     }
 
                     Spacer(modifier = Modifier.width(10.dp))
@@ -95,7 +101,10 @@ fun YearlyMarksHistoryScreen(navController: NavHostController?=null,backStack: S
                     IconButton(onClick = {
                         isClearHistoryDialogVisible.value = true
                     }) {
-                        Icon(imageVector = Icons.Default.Delete, contentDescription = "clear history")
+                        Icon(
+                            imageVector = Icons.Default.Delete,
+                            contentDescription = "clear history"
+                        )
                     }
                 }
             }
@@ -105,27 +114,30 @@ fun YearlyMarksHistoryScreen(navController: NavHostController?=null,backStack: S
                 LazyColumn(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp,)
+                        .padding(horizontal = 16.dp)
                 ) {
                     items(count = yearlyMarksHistoryList.value.size, key = {
                         yearlyMarksHistoryList.value[it].id
-                    }){
-                        YearlyMarksHistoryItem(yearlyMarks = yearlyMarksHistoryList.value[it]){
+                    }) {
+                        YearlyMarksHistoryItem(yearlyMarks = yearlyMarksHistoryList.value[it]) {
                             viewModel.deleteYearlyMarks(yearlyMarksHistoryList.value[it])
                         }
                     }
                 }
 
-            }else{
-                Box(modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .padding(horizontal = 16.dp, vertical = 8.dp), contentAlignment = Alignment.Center){
+            } else {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                        .padding(horizontal = 16.dp, vertical = 8.dp),
+                    contentAlignment = Alignment.Center
+                ) {
                     Text(text = "You have no history yet.")
                 }
             }
 
-            if (isClearHistoryDialogVisible.value){
+            if (isClearHistoryDialogVisible.value) {
                 AlertDialog(
                     onDismissRequest = { isClearHistoryDialogVisible.value = false },
                     title = { Text(text = "Clear History") },
@@ -154,11 +166,11 @@ fun YearlyMarksHistoryScreen(navController: NavHostController?=null,backStack: S
 
 
 @Composable
-fun YearlyMarksHistoryItem(yearlyMarks: YearlyMarks,onDeleted:()->Unit) {
-    ElevatedCard(modifier = Modifier.padding(5.dp),) {
+fun YearlyMarksHistoryItem(yearlyMarks: YearlyMarks, onDeleted: () -> Unit) {
+    ElevatedCard(modifier = Modifier.padding(5.dp)) {
         Column {
             Row {
-                if (yearlyMarks.oddSemGpa>0.0 &&yearlyMarks.oddSemSubjects>0){
+                if (yearlyMarks.oddSemGpa > 0.0 && yearlyMarks.oddSemSubjects > 0) {
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -176,7 +188,7 @@ fun YearlyMarksHistoryItem(yearlyMarks: YearlyMarks,onDeleted:()->Unit) {
                     }
                 }
 
-                if (yearlyMarks.evenSemGpa>0.0 && yearlyMarks.evenSemSubjects>0){
+                if (yearlyMarks.evenSemGpa > 0.0 && yearlyMarks.evenSemSubjects > 0) {
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -194,7 +206,7 @@ fun YearlyMarksHistoryItem(yearlyMarks: YearlyMarks,onDeleted:()->Unit) {
                     }
                 }
             }
-            if (yearlyMarks.totalMarks>0.0 &&yearlyMarks.totalPercentage>0){
+            if (yearlyMarks.totalMarks > 0.0 && yearlyMarks.totalPercentage > 0) {
                 Box(modifier = Modifier.padding(8.dp), contentAlignment = Alignment.Center) {
                     YearlyMarksCardItem(
                         title = "Total Marks",
@@ -205,8 +217,10 @@ fun YearlyMarksHistoryItem(yearlyMarks: YearlyMarks,onDeleted:()->Unit) {
                 }
             }
             Box(modifier = Modifier.padding(8.dp), contentAlignment = Alignment.Center) {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically) {
+                Row(
+                    Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     TextButton(
                         modifier = Modifier.weight(1f),
                         onClick = {
@@ -216,19 +230,16 @@ fun YearlyMarksHistoryItem(yearlyMarks: YearlyMarks,onDeleted:()->Unit) {
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(text = "Delete")
                     }
-//                    Spacer(modifier = Modifier.width(10.dp))
-//                    TextButton(
-//                        modifier = Modifier.weight(1f),
-//                        onClick = { /*TODO*/ })
-//                    {
-//                    Icon(imageVector = Icons.Outlined.FavoriteBorder, contentDescription = "")
-//                    Spacer(modifier = Modifier.width(5.dp))
-//                    Text(text = "Mark Favourite")
-//                    }
                     Spacer(modifier = Modifier.width(10.dp))
 
-                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center){
-                        Text(text = SimpleDateFormat(Constant.DATE_FORMAT, Locale.getDefault()).format(yearlyMarks.timeStamp), style = MaterialTheme.typography.titleSmall)
+                    Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
+                        Text(
+                            text = SimpleDateFormat(
+                                Constant.DATE_FORMAT,
+                                Locale.getDefault()
+                            ).format(yearlyMarks.timeStamp),
+                            style = MaterialTheme.typography.titleSmall
+                        )
                     }
 
                 }
@@ -242,7 +253,7 @@ fun YearlyMarksHistoryItem(yearlyMarks: YearlyMarks,onDeleted:()->Unit) {
 @Composable
 fun YearlyMarksCardItem(
     title: String,
-    subject:Int = 0,
+    subject: Int = 0,
     cgpa: Double = 0.0,
     obtainedNumber: Double,
     totalNumber: Int,
@@ -262,18 +273,18 @@ fun YearlyMarksCardItem(
             )
             Spacer(modifier = Modifier.height(8.dp))
 
-            if (subject>0 && cgpa>0.0){
+            if (subject > 0 && cgpa > 0.0) {
                 Row {
                     Text(text = "Subjects :", style = MaterialTheme.typography.titleSmall)
                     SelectionContainer {
-                        Text(text = "$subject",)
+                        Text(text = "$subject")
                     }
                 }
 
                 Row {
                     Text(text = "CGPA :", style = MaterialTheme.typography.titleSmall)
                     SelectionContainer {
-                        Text(text = "$cgpa",)
+                        Text(text = "$cgpa")
                     }
                 }
             }
@@ -281,7 +292,7 @@ fun YearlyMarksCardItem(
             Row {
                 Text(text = "Percentage :", style = MaterialTheme.typography.titleSmall)
                 SelectionContainer {
-                    Text(text = "$percentage%",)
+                    Text(text = "$percentage%")
                 }
             }
             Row {

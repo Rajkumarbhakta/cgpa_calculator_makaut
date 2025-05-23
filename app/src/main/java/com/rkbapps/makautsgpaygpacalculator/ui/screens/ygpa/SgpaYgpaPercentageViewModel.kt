@@ -9,7 +9,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SgpaYgpaPercentageViewModel @Inject constructor (private val repository: SgpaYgpaPercentageRepository):ViewModel() {
+class SgpaYgpaPercentageViewModel @Inject constructor(private val repository: SgpaYgpaPercentageRepository) :
+    ViewModel() {
 
     fun insert(gpaPercentage: GpaPercentage) = viewModelScope.launch(Dispatchers.IO) {
         repository.insert(gpaPercentage)

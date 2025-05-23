@@ -20,6 +20,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
@@ -39,16 +40,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarksTypes
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
+import java.util.Locale
 
 
 @Composable
 fun MidSemCalculatorScreen(
-    navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
+    backStack: SnapshotStateList<Any>,
     viewModel: MidSemCalculatorViewModel = hiltViewModel()
 ) {
 
@@ -96,7 +97,6 @@ fun MidSemCalculatorScreen(
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-//            navController?.navigateUp()
             backStack.removeLastOrNull()
         }
     }) {
@@ -237,7 +237,11 @@ fun MidSemCalculatorScreen(
 //                        Log.d("Number_Calculation","first $first second $second third $third fourth $fourth five $fifth six $sixth seven $seventh")
 //                        Log.d("Number_Calculation","total : $total count : ${count.intValue}")
                         totalCgpa.doubleValue =
-                            String.format("%.2f", total / count.intValue.toDouble()).toDouble()
+                            String.format(
+                                Locale.getDefault(),
+                                "%.2f",
+                                total / count.intValue.toDouble()
+                            ).toDouble()
                         totalPercentage.doubleValue =
                             calculatePercentage(total / count.intValue.toDouble())
                         viewModel.insert(
@@ -279,7 +283,7 @@ fun MidSemCalculatorScreen(
                             )
                         )
 
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
                         Toast.makeText(context, "Please enter CGPA properly.", Toast.LENGTH_SHORT)
                             .show()
                     }
@@ -439,7 +443,7 @@ fun ExposedDropdownMenuSample(
         OutlinedTextField(
             // The `menuAnchor` modifier must be passed to the text field for correctness.
             modifier = Modifier
-                .menuAnchor()
+                .menuAnchor(type = MenuAnchorType.PrimaryNotEditable, enabled = true)
                 .fillMaxWidth(),
             readOnly = true,
             value = selectedOptionText.value,

@@ -9,22 +9,23 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MidSemCalculationHistoryViewModel @Inject constructor(private val repository: MidSemCalculationHistoryRepository): ViewModel() {
+class MidSemCalculationHistoryViewModel @Inject constructor(private val repository: MidSemCalculationHistoryRepository) :
+    ViewModel() {
     val midSemHistory = repository.midSemHistory
 
-    fun getHistoryInDesc()=viewModelScope.launch(Dispatchers.IO) {
+    fun getHistoryInDesc() = viewModelScope.launch(Dispatchers.IO) {
         repository.getAllMidSemHistoryDesc()
     }
 
-    fun getHistoryInAsc()=viewModelScope.launch(Dispatchers.IO) {
+    fun getHistoryInAsc() = viewModelScope.launch(Dispatchers.IO) {
         repository.getAllMidSemHistoryAsc()
     }
 
-    fun deleteHistory()=viewModelScope.launch(Dispatchers.IO) {
+    fun deleteHistory() = viewModelScope.launch(Dispatchers.IO) {
         repository.deleteAllHistory()
     }
 
-    fun delete(item:DgpaMidSemMarks) = viewModelScope.launch(Dispatchers.IO) {
+    fun delete(item: DgpaMidSemMarks) = viewModelScope.launch(Dispatchers.IO) {
         repository.delete(item)
     }
 }

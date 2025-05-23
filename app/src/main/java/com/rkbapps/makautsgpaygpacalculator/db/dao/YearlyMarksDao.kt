@@ -24,26 +24,25 @@ interface YearlyMarksDao {
 
 
     @Query("SELECT * FROM yearlymarks")
-     fun getAll():Flow<List<YearlyMarks>>
+    fun getAll(): Flow<List<YearlyMarks>>
 
     @Query("select * from yearlymarks where isFavourite=:isFavourite")
-     fun getFavourite(isFavourite:Boolean = true):Flow<List<YearlyMarks>>
+    fun getFavourite(isFavourite: Boolean = true): Flow<List<YearlyMarks>>
 
     @Query("select * from yearlymarks order by timeStamp desc")
-     fun getAllSortedByTimeStamp():Flow<List<YearlyMarks>>
+    fun getAllSortedByTimeStamp(): Flow<List<YearlyMarks>>
 
     @Query("select * from yearlymarks order by timeStamp asc")
-     fun getAllSortedByTimeStampAsc():Flow<List<YearlyMarks>>
+    fun getAllSortedByTimeStampAsc(): Flow<List<YearlyMarks>>
 
     @Query("select * from yearlymarks where isFavourite=:isFavourite order by timeStamp desc")
-     fun getFavouriteSortedByTimeStamp(isFavourite:Boolean = true):Flow<List<YearlyMarks>>
+    fun getFavouriteSortedByTimeStamp(isFavourite: Boolean = true): Flow<List<YearlyMarks>>
 
     @Query("select * from yearlymarks where isFavourite=:isFavourite order by timeStamp asc")
-     fun getFavouriteSortedByTimeStampAsc(isFavourite:Boolean = true):Flow<List<YearlyMarks>>
+    fun getFavouriteSortedByTimeStampAsc(isFavourite: Boolean = true): Flow<List<YearlyMarks>>
 
-     @Query("delete from yearlymarks where isFavourite=:isFavourite")
-     suspend fun deleteHistory(isFavourite:Boolean = false)
-
+    @Query("delete from yearlymarks where isFavourite=:isFavourite")
+    suspend fun deleteHistory(isFavourite: Boolean = false)
 
 
 }

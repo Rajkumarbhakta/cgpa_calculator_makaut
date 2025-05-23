@@ -44,7 +44,7 @@ import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute
 
 
 @Composable
-fun HomeScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
+fun HomeScreen(backStack: SnapshotStateList<Any>) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.study))
     val homeItems = remember {
         mutableStateListOf(
@@ -53,7 +53,6 @@ fun HomeScreen(navController: NavHostController?=null,backStack: SnapshotStateLi
                 subTitle = "Calculate marks for a specific year",
                 onClick = {
                     backStack.add(NavigationRoute.YearlyMarksCalculator)
-//                    navController?.navigate(route = NavigationRoute.YearlyMarksCalculator)
                 }
             ),
             HomeScreenItem(
@@ -61,14 +60,13 @@ fun HomeScreen(navController: NavHostController?=null,backStack: SnapshotStateLi
                 subTitle = "Calculate marks for a specific year",
                 onClick = {
                     backStack.add(NavigationRoute.MidSemCalculator)
-//                    navController?.navigate(route = NavigationRoute.MidSemCalculator)
                 }
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Calculate marks for a specific year",
                 onClick = {
-                    navController?.navigate(route = NavigationRoute.DgpaCalculator)
+                    backStack.add(NavigationRoute.DgpaCalculator)
                 }
             ),
             HomeScreenItem(
@@ -76,7 +74,6 @@ fun HomeScreen(navController: NavHostController?=null,backStack: SnapshotStateLi
                 subTitle = "Calculate marks for a specific year",
                 onClick = {
                     backStack.add(NavigationRoute.SgpaYgpaPercentageCalculator)
-//                    navController?.navigate(route = NavigationRoute.SgpaYgpaPercentageCalculator)
                 }
             ),
             HomeScreenItem(
@@ -84,7 +81,6 @@ fun HomeScreen(navController: NavHostController?=null,backStack: SnapshotStateLi
                 subTitle = "Check your calculation history.",
                 onClick = {
                     backStack.add(NavigationRoute.History)
-//                    navController?.navigate(route = NavigationRoute.History)
                 }
             ),
         )

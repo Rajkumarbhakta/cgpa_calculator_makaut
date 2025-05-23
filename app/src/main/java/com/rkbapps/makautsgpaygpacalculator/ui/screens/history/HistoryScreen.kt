@@ -26,7 +26,7 @@ import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenItem
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenListItems
 
 @Composable
-fun HistoryScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>) {
+fun HistoryScreen(backStack: SnapshotStateList<Any>) {
     val composition by rememberLottieComposition(spec = LottieCompositionSpec.RawRes(R.raw.history))
     val historyItems = remember {
         mutableStateListOf(
@@ -35,28 +35,28 @@ fun HistoryScreen(navController: NavHostController?=null,backStack: SnapshotStat
                 subTitle = "Get All History of Yearly Marks % Convert",
                 onClick = {
                     backStack.add(NavigationRoute.YearlyMarksHistory)
-                    navController?.navigate(route = NavigationRoute.YearlyMarksHistory) }
+                }
             ),
             HomeScreenItem(
                 title = "Mid Sem % Calculator",
                 subTitle = "Get All History of Mid Sem % Calculator",
                 onClick = {
                     backStack.add(NavigationRoute.MidSemHistory)
-                    navController?.navigate(route = NavigationRoute.MidSemHistory) }
+                }
             ),
             HomeScreenItem(
                 title = "DGPA % Calculate from SGPA",
                 subTitle = "Get All History of DGPA % Calculate from SGPA",
                 onClick = {
                     backStack.add(NavigationRoute.DgpaHistory)
-                    navController?.navigate(route = NavigationRoute.DgpaHistory) }
+                }
             ),
             HomeScreenItem(
                 title = "SGPA/YGPA to % Calculator",
                 subTitle = "Get All History of SGPA/YGPA to % Calculator",
                 onClick = {
                     backStack.add(NavigationRoute.SgpaYgpaPercentageHistory)
-                    navController?.navigate(route = NavigationRoute.SgpaYgpaPercentageHistory) }
+                }
             ),
 
             )
@@ -69,7 +69,6 @@ fun HistoryScreen(navController: NavHostController?=null,backStack: SnapshotStat
                 showBack = true
             ) {
                 backStack.removeLastOrNull()
-                navController?.navigateUp()
             }
         }
     ) { innerPadding ->

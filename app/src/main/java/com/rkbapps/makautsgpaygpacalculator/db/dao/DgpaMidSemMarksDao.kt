@@ -13,6 +13,13 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DgpaMidSemMarksDao {
 
+    /**
+     * Inserts a [DgpaMidSemMarks] into the database.
+     * If a record with the same primary key already exists, it will be replaced.
+     * This is a suspend function and should be called from a coroutine.
+     *
+     * @param dgpaMidSemMarks The [DgpaMidSemMarks] object to insert.
+     */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(dgpaMidSemMarks: DgpaMidSemMarks)
 
@@ -23,13 +30,13 @@ interface DgpaMidSemMarksDao {
     suspend fun delete(dgpaMidSemMarks: DgpaMidSemMarks)
 
     @Query("SELECT * FROM DgpaMidSemMarks")
-     fun getAll(): Flow<List<DgpaMidSemMarks>>
+    fun getAll(): Flow<List<DgpaMidSemMarks>>
 
     @Query("select * from dgpamidsemmarks where isFavorite=:isFavorite")
-     fun getFavorite(isFavorite: Boolean = true): Flow<List<DgpaMidSemMarks>>
+    fun getFavorite(isFavorite: Boolean = true): Flow<List<DgpaMidSemMarks>>
 
-     @Query("select * from dgpamidsemmarks where type not in (:excludeType) ")
-     fun getExcludeType(excludeType: List<String>): Flow<List<DgpaMidSemMarks>>
+    @Query("select * from dgpamidsemmarks where type not in (:excludeType) ")
+    fun getExcludeType(excludeType: List<String>): Flow<List<DgpaMidSemMarks>>
 
     @Query("SELECT * FROM DgpaMidSemMarks WHERE type NOT IN (:excludedTypes) ORDER BY timestamp DESC")
     fun getMidSemMarksExceptExcludedOrderedByTimestampDesc(excludedTypes: List<String>): Flow<List<DgpaMidSemMarks>>
@@ -57,7 +64,6 @@ interface DgpaMidSemMarksDao {
     suspend fun deleteMidSemMarks(vararg excludedTypes: String) {
         deleteMidSemMarksByTypesTransaction(excludedTypes.toList())
     }
-
 
 
 }

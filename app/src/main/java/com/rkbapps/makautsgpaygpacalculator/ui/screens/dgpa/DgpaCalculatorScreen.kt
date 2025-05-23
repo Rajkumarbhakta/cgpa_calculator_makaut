@@ -44,8 +44,10 @@ import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import java.util.Locale
 
 @Composable
-fun DgpaCalculatorScreen(navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
-                         viewModel:DgpaCalculatorViewModel = hiltViewModel()) {
+fun DgpaCalculatorScreen(
+    backStack: SnapshotStateList<Any>,
+    viewModel: DgpaCalculatorViewModel = hiltViewModel()
+) {
     val context = LocalContext.current
     val selectedItem = rememberSaveable {
         mutableStateOf(CourseType.FOUR_YEAR_DEGREE)
@@ -53,11 +55,12 @@ fun DgpaCalculatorScreen(navController: NavHostController?=null,backStack: Snaps
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-//            navController?.navigateUp()
             backStack.removeLastOrNull()
         }
     }) {
-        Column(modifier = Modifier.padding(it).padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Column(modifier = Modifier
+            .padding(it)
+            .padding(horizontal = 16.dp, vertical = 8.dp)) {
             Text(
                 text = "Choose your course duration:",
                 style = MaterialTheme.typography.titleMedium,
@@ -94,7 +97,7 @@ fun DgpaCalculatorScreen(navController: NavHostController?=null,backStack: Snaps
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 8.dp)
                     ) {
-                        FourYearDegreeItem(context = context,viewModel= viewModel)
+                        FourYearDegreeItem(context = context, viewModel = viewModel)
                     }
                 }
 
@@ -104,7 +107,7 @@ fun DgpaCalculatorScreen(navController: NavHostController?=null,backStack: Snaps
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 8.dp)
                     ) {
-                        ThreeYearDegreeItem(context = context,viewModel=viewModel)
+                        ThreeYearDegreeItem(context = context, viewModel = viewModel)
                     }
                 }
 
@@ -114,7 +117,7 @@ fun DgpaCalculatorScreen(navController: NavHostController?=null,backStack: Snaps
                             .fillMaxWidth()
                             .padding(horizontal = 16.dp, vertical = 8.dp)
                     ) {
-                        ThreeYearLateralItem(context = context,viewModel=viewModel)
+                        ThreeYearLateralItem(context = context, viewModel = viewModel)
                     }
                 }
 
@@ -212,7 +215,7 @@ fun SemesterSgpaInputField(
 
 
 @Composable
-fun FourYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
+fun FourYearDegreeItem(context: Context, viewModel: DgpaCalculatorViewModel) {
 
     val firstSemester = rememberSaveable {
         mutableStateOf("")
@@ -354,16 +357,17 @@ fun FourYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
                         eighthSemester.value.isNotEmpty()
                     ) {
                         val ygpa1 = (firstSemester.value.toDouble() +
-                                secondSemester.value.toDouble())/2
+                                secondSemester.value.toDouble()) / 2
                         val ygpa2 = (thirdSemester.value.toDouble() +
-                                fourthSemester.value.toDouble())/2
+                                fourthSemester.value.toDouble()) / 2
                         val ygpa3 = (fifthSemester.value.toDouble() +
-                                sixthSemester.value.toDouble())/2
+                                sixthSemester.value.toDouble()) / 2
                         val ygpa4 = (seventhSemester.value.toDouble() +
-                                eighthSemester.value.toDouble())/2
+                                eighthSemester.value.toDouble()) / 2
                         val total = ygpa1 + ygpa2 + (1.5 * ygpa3) + (1.5 * ygpa4)
                         val average = total / 5
-                        overallDgpa.doubleValue = String.format(locale = Locale.getDefault(),"%.2f", average).toDouble()
+                        overallDgpa.doubleValue =
+                            String.format(locale = Locale.getDefault(), "%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
                         viewModel.insert(
                             DgpaMidSemMarks(
@@ -392,7 +396,7 @@ fun FourYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     //Toast
                     Toast.makeText(context, "Enter proper SGPA.", Toast.LENGTH_SHORT).show()
                 }
@@ -477,7 +481,7 @@ fun FourYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
 }
 
 @Composable
-fun ThreeYearLateralItem(context: Context,viewModel: DgpaCalculatorViewModel) {
+fun ThreeYearLateralItem(context: Context, viewModel: DgpaCalculatorViewModel) {
 
     val thirdSemester = rememberSaveable {
         mutableStateOf("")
@@ -591,31 +595,31 @@ fun ThreeYearLateralItem(context: Context,viewModel: DgpaCalculatorViewModel) {
                     ) {
 
                         val ygpa2 = (thirdSemester.value.toDouble() +
-                                fourthSemester.value.toDouble())/2
+                                fourthSemester.value.toDouble()) / 2
                         val ygpa3 = (fifthSemester.value.toDouble() +
-                                sixthSemester.value.toDouble())/2
+                                sixthSemester.value.toDouble()) / 2
                         val ygpa4 = (seventhSemester.value.toDouble() +
-                                eighthSemester.value.toDouble())/2
+                                eighthSemester.value.toDouble()) / 2
 
                         val total = ygpa2 + (1.5 * ygpa3) + (1.5 * ygpa4)
 
                         val average = total / 4
-                        overallDgpa.doubleValue = String.format("%.2f", average).toDouble()
+                        overallDgpa.doubleValue = String.format(Locale.getDefault(),"%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
 
                         viewModel.insert(
                             DgpaMidSemMarks(
-                            type = DgpaMidSemMarksTypes.DGPA_3_YEAR,
-                            thirdSemGpa = thirdSemester.value.toDouble(),
-                            fourthSemGpa = fourthSemester.value.toDouble(),
-                            fifthSemGpa = fifthSemester.value.toDouble(),
-                            sixthSemGpa = sixthSemester.value.toDouble(),
-                            seventhSemGpa = seventhSemester.value.toDouble(),
-                            eighthSemGpa = eighthSemester.value.toDouble(),
+                                type = DgpaMidSemMarksTypes.DGPA_3_YEAR,
+                                thirdSemGpa = thirdSemester.value.toDouble(),
+                                fourthSemGpa = fourthSemester.value.toDouble(),
+                                fifthSemGpa = fifthSemester.value.toDouble(),
+                                sixthSemGpa = sixthSemester.value.toDouble(),
+                                seventhSemGpa = seventhSemester.value.toDouble(),
+                                eighthSemGpa = eighthSemester.value.toDouble(),
 
-                            avgGpa = overallDgpa.doubleValue,
-                            avgPercentage = averagePercentage.doubleValue
-                        )
+                                avgGpa = overallDgpa.doubleValue,
+                                avgPercentage = averagePercentage.doubleValue
+                            )
                         )
 
                     } else {
@@ -626,7 +630,7 @@ fun ThreeYearLateralItem(context: Context,viewModel: DgpaCalculatorViewModel) {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     //Toast
                     Toast.makeText(context, "Enter proper SGPA.", Toast.LENGTH_SHORT).show()
                 }
@@ -711,7 +715,7 @@ fun ThreeYearLateralItem(context: Context,viewModel: DgpaCalculatorViewModel) {
 }
 
 @Composable
-fun ThreeYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
+fun ThreeYearDegreeItem(context: Context, viewModel: DgpaCalculatorViewModel) {
 
     val firstSemester = rememberSaveable {
         mutableStateOf("")
@@ -825,32 +829,34 @@ fun ThreeYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
                     ) {
 
                         val ygpa1 = (firstSemester.value.toDouble() +
-                                secondSemester.value.toDouble())/2
+                                secondSemester.value.toDouble()) / 2
                         val ygpa2 = (thirdSemester.value.toDouble() +
-                                fourthSemester.value.toDouble())/2
+                                fourthSemester.value.toDouble()) / 2
 
                         val ygpa3 = (fifthSemester.value.toDouble() +
-                                sixthSemester.value.toDouble())/2
+                                sixthSemester.value.toDouble()) / 2
 
                         val total = ygpa1 + ygpa2 + ygpa3
 
                         val average = total / 3
-                        overallDgpa.doubleValue = String.format("%.2f", average).toDouble()
+                        overallDgpa.doubleValue = String.format(Locale.getDefault(),"%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
 
-                        viewModel.insert(DgpaMidSemMarks(
-                            type = DgpaMidSemMarksTypes.DGPA_3_YEAR,
-                            firstSemGpa = firstSemester.value.toDouble(),
-                            secondSemGpa = secondSemester.value.toDouble(),
-                            thirdSemGpa = thirdSemester.value.toDouble(),
-                            fourthSemGpa = fourthSemester.value.toDouble(),
-                            fifthSemGpa = fifthSemester.value.toDouble(),
-                            sixthSemGpa = sixthSemester.value.toDouble(),
+                        viewModel.insert(
+                            DgpaMidSemMarks(
+                                type = DgpaMidSemMarksTypes.DGPA_3_YEAR,
+                                firstSemGpa = firstSemester.value.toDouble(),
+                                secondSemGpa = secondSemester.value.toDouble(),
+                                thirdSemGpa = thirdSemester.value.toDouble(),
+                                fourthSemGpa = fourthSemester.value.toDouble(),
+                                fifthSemGpa = fifthSemester.value.toDouble(),
+                                sixthSemGpa = sixthSemester.value.toDouble(),
 
-                            avgGpa = overallDgpa.doubleValue,
-                            avgPercentage = averagePercentage.doubleValue
+                                avgGpa = overallDgpa.doubleValue,
+                                avgPercentage = averagePercentage.doubleValue
 
-                        ))
+                            )
+                        )
                     } else {
                         //Toast
                         Toast.makeText(
@@ -859,7 +865,7 @@ fun ThreeYearDegreeItem(context: Context,viewModel: DgpaCalculatorViewModel) {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
-                } catch (e: Exception) {
+                } catch (_: Exception) {
                     //Toast
                     Toast.makeText(context, "Enter proper SGPA.", Toast.LENGTH_SHORT).show()
                 }

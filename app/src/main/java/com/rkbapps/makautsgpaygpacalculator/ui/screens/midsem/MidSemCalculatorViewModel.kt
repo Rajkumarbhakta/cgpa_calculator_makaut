@@ -10,12 +10,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MidSemCalculatorViewModel @Inject constructor(private val dgpaMidSemMarksDao: DgpaMidSemMarksDao):ViewModel() {
+class MidSemCalculatorViewModel @Inject constructor(private val dgpaMidSemMarksDao: DgpaMidSemMarksDao) :
+    ViewModel() {
 
-    fun insert(dgpaMidSemMarks: DgpaMidSemMarks)=viewModelScope.launch(Dispatchers.IO){
+    fun insert(dgpaMidSemMarks: DgpaMidSemMarks) = viewModelScope.launch(Dispatchers.IO) {
         try {
             dgpaMidSemMarksDao.insert(dgpaMidSemMarks)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

@@ -11,14 +11,14 @@ import javax.inject.Inject
 class YearlyMarksHistoryRepository @Inject constructor(private val yearlyMarksDao: YearlyMarksDao) {
 
     private val _yearlyCalculatedMarks = MutableStateFlow<List<YearlyMarks>>(emptyList())
-    val yearlyCalculatedMarks:StateFlow<List<YearlyMarks>> = _yearlyCalculatedMarks
+    val yearlyCalculatedMarks: StateFlow<List<YearlyMarks>> = _yearlyCalculatedMarks
 
     suspend fun getAllYearlyMarks() {
         try {
             val marks = yearlyMarksDao.getAll()
             _yearlyCalculatedMarks.emitAll(marks)
-        }catch (e:Exception){
-         e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
 
     }
@@ -42,13 +42,11 @@ class YearlyMarksHistoryRepository @Inject constructor(private val yearlyMarksDa
     }
 
 
-
-
-    suspend fun getAllFavouriteMarks(){
+    suspend fun getAllFavouriteMarks() {
         try {
             val marks = yearlyMarksDao.getFavourite(isFavourite = true)
             _yearlyCalculatedMarks.emitAll(marks)
-        }catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
@@ -62,19 +60,19 @@ class YearlyMarksHistoryRepository @Inject constructor(private val yearlyMarksDa
         }
     }
 
-    suspend fun  deleteFavourite(yearlyMarks: YearlyMarks){
+    suspend fun deleteFavourite(yearlyMarks: YearlyMarks) {
         try {
             yearlyMarks.isFavourite = false
             yearlyMarksDao.update(yearlyMarks)
-        }catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    suspend fun deleteAEntity(yearlyMarks: YearlyMarks){
+    suspend fun deleteAEntity(yearlyMarks: YearlyMarks) {
         try {
             yearlyMarksDao.delete(yearlyMarks)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }

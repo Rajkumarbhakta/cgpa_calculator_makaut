@@ -23,27 +23,27 @@ interface GpaPercentageDao {
     suspend fun update(gpaPercentage: GpaPercentage)
 
     @Query("SELECT * FROM gpapercentage")
-     fun getAll(): Flow<List<GpaPercentage>>
+    fun getAll(): Flow<List<GpaPercentage>>
 
     @Query("select * from gpapercentage order by timeStamps desc")
-     fun getAllSortedByTimeDesc(): Flow<List<GpaPercentage>>
+    fun getAllSortedByTimeDesc(): Flow<List<GpaPercentage>>
 
     @Query("select * from gpapercentage order by timeStamps asc")
-     fun getAllSortedByTimeAsc(): Flow<List<GpaPercentage>>
+    fun getAllSortedByTimeAsc(): Flow<List<GpaPercentage>>
 
     @Query("select * from gpapercentage where isFavorite=:isFavorite")
-     fun getAllFavorite(isFavorite: Boolean = true ): Flow<List<GpaPercentage>>
+    fun getAllFavorite(isFavorite: Boolean = true): Flow<List<GpaPercentage>>
 
 
     @Query("select * from gpapercentage where isFavorite=:isFavorite order by timeStamps desc")
-     fun getAllFavoriteSortedByTimeDesc(isFavorite: Boolean = true ): Flow<List<GpaPercentage>>
+    fun getAllFavoriteSortedByTimeDesc(isFavorite: Boolean = true): Flow<List<GpaPercentage>>
 
 
     @Query("select * from gpapercentage where isFavorite=:isFavorite order by timeStamps asc")
-     fun getAllFavoriteSortedByTimeAsc(isFavorite: Boolean = true ): Flow<List<GpaPercentage>>
+    fun getAllFavoriteSortedByTimeAsc(isFavorite: Boolean = true): Flow<List<GpaPercentage>>
 
-     @Query("delete from gpapercentage where isFavorite=:isFavorite")
-     suspend fun deleteAll(isFavorite: Boolean = false)
+    @Query("delete from gpapercentage where isFavorite=:isFavorite")
+    suspend fun deleteAll(isFavorite: Boolean = false)
 
 
 }

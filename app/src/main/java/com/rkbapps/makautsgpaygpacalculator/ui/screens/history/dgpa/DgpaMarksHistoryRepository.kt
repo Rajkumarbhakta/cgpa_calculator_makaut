@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.emitAll
 import javax.inject.Inject
 
-class DgpaMarksHistoryRepository @Inject constructor(private val dao:DgpaMidSemMarksDao) {
+class DgpaMarksHistoryRepository @Inject constructor(private val dao: DgpaMidSemMarksDao) {
 
 
     private val includedType = listOf(
@@ -26,48 +26,45 @@ class DgpaMarksHistoryRepository @Inject constructor(private val dao:DgpaMidSemM
 
 
     private val _dgpaMarksHistory = MutableStateFlow<List<DgpaMidSemMarks>>(emptyList())
-    val dgpaMarksHistory:StateFlow<List<DgpaMidSemMarks>> = _dgpaMarksHistory
+    val dgpaMarksHistory: StateFlow<List<DgpaMidSemMarks>> = _dgpaMarksHistory
 
 
-
-    suspend fun getAllDgpaHistoryDesc(){
+    suspend fun getAllDgpaHistoryDesc() {
         try {
             val history = dao.getMidSemMarksExceptExcludedOrderedByTimestampAsc(excludedType)
             _dgpaMarksHistory.emitAll(history)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
     }
 
-    suspend fun getAllDgpaHistoryAsc(){
+    suspend fun getAllDgpaHistoryAsc() {
         try {
             val history = dao.getMidSemMarksExceptExcludedOrderedByTimestampDesc(excludedType)
             _dgpaMarksHistory.emitAll(history)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
     }
 
 
-    suspend fun deleteAllHistory(){
+    suspend fun deleteAllHistory() {
         try {
             dao.deleteMidSemMarks(*includedType.toTypedArray())
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
 
-    suspend fun delete(item:DgpaMidSemMarks){
+    suspend fun delete(item: DgpaMidSemMarks) {
         try {
             dao.delete(item)
-        }catch (e:Exception){
+        } catch (e: Exception) {
             e.printStackTrace()
         }
     }
-
-
 
 
 }

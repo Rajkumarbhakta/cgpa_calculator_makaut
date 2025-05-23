@@ -35,7 +35,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.YearlyMarks
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateObtainedNumber
@@ -44,7 +43,7 @@ import com.rkbapps.makautsgpaygpacalculator.utils.calculateTotalNumber
 
 @Composable
 fun YearlyMarksConverterScreen(
-    navController: NavHostController?=null,backStack: SnapshotStateList<Any>,
+    backStack: SnapshotStateList<Any>,
     viewModel: YearlyMarksViewModel = hiltViewModel()
 ) {
     val context = LocalContext.current
@@ -92,7 +91,6 @@ fun YearlyMarksConverterScreen(
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
-//            navController?.navigateUp()
             backStack.removeLastOrNull()
         }
     }) {
@@ -170,7 +168,7 @@ fun YearlyMarksConverterScreen(
                                     ).toString()
 
 
-                                } catch (e: Exception) {
+                                } catch (_: Exception) {
                                     Toast.makeText(
                                         context,
                                         "Please provide proper odd sem details.",
@@ -201,7 +199,7 @@ fun YearlyMarksConverterScreen(
                                         evenSemPercentage.value.toDouble()
                                     ).toString()
 
-                                } catch (e: Exception) {
+                                } catch (_: Exception) {
                                     Toast.makeText(
                                         context,
                                         "Please provide proper even sem details.",
@@ -233,7 +231,7 @@ fun YearlyMarksConverterScreen(
                                     totalSubjects,
                                     yearPercentage.value.toDouble()
                                 ).toString()
-                            } catch (e: Exception) {
+                            } catch (_: Exception) {
                                 Toast.makeText(
                                     context,
                                     "Please provide proper details.",
@@ -267,7 +265,7 @@ fun YearlyMarksConverterScreen(
                         }
 
 
-                    } catch (e: Exception) {
+                    } catch (_: Exception) {
                         Toast.makeText(
                             context,
                             "Something went wrong.Please provide details properly.",
