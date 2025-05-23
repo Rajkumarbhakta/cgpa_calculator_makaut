@@ -168,31 +168,35 @@ fun MidSemHistoryItem(item:DgpaMidSemMarks,onDeleted:()->Unit) {
                 ) {
                     if (item.firstSemGpa > 0.0) MidSemHistoryItemRowItem(
                         title = "1st Semester",
-                        value = 5.6
+                        value = item.firstSemGpa
                     )
                     if (item.secondSemGpa > 0.0) MidSemHistoryItemRowItem(
                         title = "2nd Semester",
-                        value = 5.5
+                        value = item.secondSemGpa
                     )
                     if (item.thirdSemGpa > 0.0) MidSemHistoryItemRowItem(
                         title = Options.THIRD_SEM,
-                        value = 6.5
+                        value = item.thirdSemGpa
                     )
                     if (item.fourthSemGpa > 0.0) MidSemHistoryItemRowItem(
                         title = Options.FOURTH_SEM,
-                        value = 8.5
+                        value = item.fourthSemGpa
                     )
                     if (item.fifthSemGpa > 0.0) MidSemHistoryItemRowItem(
                         title = Options.FIFTH_SEM,
-                        value = 9.8
+                        value = item.fifthSemGpa
                     )
                     if (item.sixthSemGpa > 0.0) MidSemHistoryItemRowItem(
                         title = Options.SIXTH_SEM,
-                        value = 7.8
+                        value = item.sixthSemGpa
                     )
                     if (item.seventhSemGpa > 0.0) MidSemHistoryItemRowItem(
                         title = Options.SEVENTH_SEM,
-                        value = 9.9
+                        value = item.seventhSemGpa
+                    )
+                    if (item.eighthSemGpa > 0.0) MidSemHistoryItemRowItem(
+                        title = "8th Semester",
+                        value = item.eighthSemGpa
                     )
                 }
             }
@@ -204,8 +208,8 @@ fun MidSemHistoryItem(item:DgpaMidSemMarks,onDeleted:()->Unit) {
                             .fillMaxWidth()
                             .padding(8.dp)
                     ) {
-                        MidSemHistoryItemRowItem(title = "Average CGPA", value = 5.6)
-                        MidSemHistoryItemRowItem(title = "Average Percentage", value = 5.5)
+                        MidSemHistoryItemRowItem(title = "Average CGPA", value = item.avgGpa)
+                        MidSemHistoryItemRowItem(title = "Average Percentage", value = item.avgPercentage)
                     }
                 }
             }
@@ -260,7 +264,7 @@ fun MidSemHistoryItemRowItem(
     Row(modifier = modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(text = "$title :", style = MaterialTheme.typography.titleSmall)
         SelectionContainer {
-            Text(text = "${value}",)
+            Text(text = "$value",)
         }
     }
 }
