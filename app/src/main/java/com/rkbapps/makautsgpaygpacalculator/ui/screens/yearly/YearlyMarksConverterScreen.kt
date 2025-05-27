@@ -1,6 +1,7 @@
 package com.rkbapps.makautsgpaygpacalculator.ui.screens.yearly
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -300,7 +301,12 @@ fun YearlyMarksConverterScreen(
             }
 
             Row(modifier = Modifier.fillMaxWidth()) {
-                if (oddSemPercentage.value.isNotEmpty() && oddSemTotalNumber.value.isNotEmpty() && oddSemObtainedNumber.value.isNotEmpty()) {
+                AnimatedVisibility(oddSemPercentage.value.isNotEmpty()
+                        && oddSemTotalNumber.value.isNotEmpty()
+                        && oddSemObtainedNumber.value.isNotEmpty(),
+                    modifier = Modifier
+                        .weight(1f)
+                ) {
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -314,7 +320,12 @@ fun YearlyMarksConverterScreen(
                         )
                     }
                 }
-                if (evenSemObtainedNumber.value.isNotEmpty() && evenSemPercentage.value.isNotEmpty() && evenSemTotalNumber.value.isNotEmpty()) {
+                AnimatedVisibility(evenSemObtainedNumber.value.isNotEmpty()
+                        && evenSemPercentage.value.isNotEmpty()
+                        && evenSemTotalNumber.value.isNotEmpty(),
+                    modifier = Modifier
+                        .weight(1f)
+                ) {
                     Box(
                         modifier = Modifier
                             .weight(1f)
@@ -330,7 +341,7 @@ fun YearlyMarksConverterScreen(
                 }
             }
 
-            if (yearPercentage.value.isNotEmpty() && yearObtainedNumber.value.isNotEmpty() && yearTotalNumber.value.isNotEmpty()) {
+            AnimatedVisibility(yearPercentage.value.isNotEmpty() && yearObtainedNumber.value.isNotEmpty() && yearTotalNumber.value.isNotEmpty()) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()

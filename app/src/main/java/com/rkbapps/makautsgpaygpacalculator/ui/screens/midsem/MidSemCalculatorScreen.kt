@@ -1,6 +1,7 @@
 package com.rkbapps.makautsgpaygpacalculator.ui.screens.midsem
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -108,36 +110,38 @@ fun MidSemCalculatorScreen(
                 .verticalScroll(rememberScrollState())
         ) {
 
-            when (selectedIndexText.value) {
+            LaunchedEffect(selectedIndexText.value) {
+                when (selectedIndexText.value) {
 
-                Options.THIRD_SEM -> {
-                    count.intValue = 3
-                    fourthSemCgpa.value = ""
-                    fifthSemCgpa.value = ""
-                    sixthSemCgpa.value = ""
-                    seventhSemCgpa.value = ""
-                }
+                    Options.THIRD_SEM -> {
+                        count.intValue = 3
+                        fourthSemCgpa.value = ""
+                        fifthSemCgpa.value = ""
+                        sixthSemCgpa.value = ""
+                        seventhSemCgpa.value = ""
+                    }
 
-                Options.FOURTH_SEM -> {
-                    count.intValue = 4
-                    fifthSemCgpa.value = ""
-                    sixthSemCgpa.value = ""
-                    seventhSemCgpa.value = ""
-                }
+                    Options.FOURTH_SEM -> {
+                        count.intValue = 4
+                        fifthSemCgpa.value = ""
+                        sixthSemCgpa.value = ""
+                        seventhSemCgpa.value = ""
+                    }
 
-                Options.FIFTH_SEM -> {
-                    count.intValue = 5
-                    sixthSemCgpa.value = ""
-                    seventhSemCgpa.value = ""
-                }
+                    Options.FIFTH_SEM -> {
+                        count.intValue = 5
+                        sixthSemCgpa.value = ""
+                        seventhSemCgpa.value = ""
+                    }
 
-                Options.SIXTH_SEM -> {
-                    count.intValue = 6
-                    seventhSemCgpa.value = ""
-                }
+                    Options.SIXTH_SEM -> {
+                        count.intValue = 6
+                        seventhSemCgpa.value = ""
+                    }
 
-                Options.SEVENTH_SEM -> {
-                    count.intValue = 7
+                    Options.SEVENTH_SEM -> {
+                        count.intValue = 7
+                    }
                 }
             }
 
@@ -183,28 +187,28 @@ fun MidSemCalculatorScreen(
                 )
             }
 
-            if (count.intValue >= 4) {
+            AnimatedVisibility (count.intValue >= 4) {
                 SemesterNumberFromItem(
                     semester = Options.FOURTH_SEM,
                     cgpa = fourthSemCgpa
                 )
             }
 
-            if (count.intValue >= 5) {
+            AnimatedVisibility  (count.intValue >= 5) {
                 SemesterNumberFromItem(
                     semester = Options.FIFTH_SEM,
                     cgpa = fifthSemCgpa
                 )
             }
 
-            if (count.intValue >= 6) {
+            AnimatedVisibility  (count.intValue >= 6) {
                 SemesterNumberFromItem(
                     semester = Options.SIXTH_SEM,
                     cgpa = sixthSemCgpa
                 )
             }
 
-            if (count.intValue >= 7) {
+            AnimatedVisibility  (count.intValue >= 7) {
                 SemesterNumberFromItem(
                     semester = Options.SEVENTH_SEM,
                     cgpa = seventhSemCgpa
@@ -307,7 +311,7 @@ fun MidSemCalculatorScreen(
                 }
             }
 
-            if (totalCgpa.doubleValue > 0.0 && totalPercentage.doubleValue > 0.0) {
+            AnimatedVisibility  (totalCgpa.doubleValue > 0.0 && totalPercentage.doubleValue > 0.0) {
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()

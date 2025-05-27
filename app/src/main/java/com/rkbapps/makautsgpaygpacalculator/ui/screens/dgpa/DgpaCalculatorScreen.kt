@@ -2,6 +2,7 @@ package com.rkbapps.makautsgpaygpacalculator.ui.screens.dgpa
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,7 +37,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarksTypes
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
@@ -58,9 +58,11 @@ fun DgpaCalculatorScreen(
             backStack.removeLastOrNull()
         }
     }) {
-        Column(modifier = Modifier
-            .padding(it)
-            .padding(horizontal = 16.dp, vertical = 8.dp)) {
+        Column(
+            modifier = Modifier
+                .padding(it)
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+        ) {
             Text(
                 text = "Choose your course duration:",
                 style = MaterialTheme.typography.titleMedium,
@@ -423,7 +425,7 @@ fun FourYearDegreeItem(context: Context, viewModel: DgpaCalculatorViewModel) {
         }
         Spacer(modifier = Modifier.height(8.dp))
 
-        if (overallDgpa.doubleValue > 0.0 && averagePercentage.doubleValue > 0.0) {
+        AnimatedVisibility(overallDgpa.doubleValue > 0.0 && averagePercentage.doubleValue > 0.0) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(
                     modifier = Modifier
@@ -604,7 +606,8 @@ fun ThreeYearLateralItem(context: Context, viewModel: DgpaCalculatorViewModel) {
                         val total = ygpa2 + (1.5 * ygpa3) + (1.5 * ygpa4)
 
                         val average = total / 4
-                        overallDgpa.doubleValue = String.format(Locale.getDefault(),"%.2f", average).toDouble()
+                        overallDgpa.doubleValue =
+                            String.format(Locale.getDefault(), "%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
 
                         viewModel.insert(
@@ -655,7 +658,7 @@ fun ThreeYearLateralItem(context: Context, viewModel: DgpaCalculatorViewModel) {
         }
         Spacer(modifier = Modifier.height(8.dp))
 
-        if (overallDgpa.doubleValue > 0.0 && averagePercentage.doubleValue > 0.0) {
+        AnimatedVisibility(overallDgpa.doubleValue > 0.0 && averagePercentage.doubleValue > 0.0) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(
                     modifier = Modifier
@@ -839,7 +842,8 @@ fun ThreeYearDegreeItem(context: Context, viewModel: DgpaCalculatorViewModel) {
                         val total = ygpa1 + ygpa2 + ygpa3
 
                         val average = total / 3
-                        overallDgpa.doubleValue = String.format(Locale.getDefault(),"%.2f", average).toDouble()
+                        overallDgpa.doubleValue =
+                            String.format(Locale.getDefault(), "%.2f", average).toDouble()
                         averagePercentage.doubleValue = calculatePercentage(average)
 
                         viewModel.insert(
@@ -890,7 +894,7 @@ fun ThreeYearDegreeItem(context: Context, viewModel: DgpaCalculatorViewModel) {
         }
         Spacer(modifier = Modifier.height(8.dp))
 
-        if (overallDgpa.doubleValue > 0.0 && averagePercentage.doubleValue > 0.0) {
+        AnimatedVisibility(overallDgpa.doubleValue > 0.0 && averagePercentage.doubleValue > 0.0) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(
                     modifier = Modifier

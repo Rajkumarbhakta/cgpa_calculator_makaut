@@ -1,6 +1,7 @@
 package com.rkbapps.makautsgpaygpacalculator.ui.screens.ygpa
 
 import android.widget.Toast
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -128,7 +129,7 @@ fun SgpaYgpaPercentageCalculatorScreen(
                 }
             }
 
-            if (percentage.doubleValue > 0.0) {
+            AnimatedVisibility(percentage.doubleValue > 0.0) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
