@@ -41,6 +41,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.rkbapps.makautsgpaygpacalculator.R
 import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 
 
 @Composable
@@ -128,37 +129,6 @@ fun HomeScreen(backStack: SnapshotStateList<Any>) {
         }
     }
 }
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AppTopBar(
-    title: String = "CGPA Calculator - MAKAUT",
-    showBack: Boolean = false,
-    onBackClick: () -> Unit = {}
-) {
-    TopAppBar(
-        title = {
-            Text(title, modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Center)
-        },
-        navigationIcon = {
-            if (showBack) {
-                IconButton(onClick = { onBackClick() }) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "back",
-                        tint = MaterialTheme.colorScheme.onPrimary
-                    )
-                }
-            }
-        },
-        colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
-            titleContentColor = MaterialTheme.colorScheme.onPrimary
-        )
-    )
-}
-
 
 @Composable
 fun HomeScreenListItems(

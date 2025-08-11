@@ -44,7 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarksTypes
-import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import java.util.Locale
 

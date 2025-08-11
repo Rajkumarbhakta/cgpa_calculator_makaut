@@ -21,7 +21,7 @@ import com.airbnb.lottie.compose.LottieConstants
 import com.airbnb.lottie.compose.rememberLottieComposition
 import com.rkbapps.makautsgpaygpacalculator.R
 import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute
-import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenItem
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.HomeScreenListItems
 

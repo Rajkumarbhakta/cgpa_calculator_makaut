@@ -3,6 +3,20 @@ package com.rkbapps.makautsgpaygpacalculator.utils
 import java.util.Locale
 
 
+
+
+
+
+fun formateDouble(value: Double): Double?{
+    return try {
+        String.format(locale = Locale.getDefault(), "%.2f", value).toDouble()
+    }catch (e: Exception){
+        null
+    }
+}
+
+
+
 /**
  * Calculates the percentage from the SGPA.
  *

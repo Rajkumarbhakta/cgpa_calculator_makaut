@@ -63,5 +63,4 @@ object DgpaMidSemMarksTypes {
 
     const val DGPA_4_YEAR = "DGPA_4_YEAR"
     const val DGPA_3_YEAR = "DGPA_3_YEAR"
-
 }

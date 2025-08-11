@@ -20,7 +20,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.rkbapps.makautsgpaygpacalculator.BuildConfig
 import com.rkbapps.makautsgpaygpacalculator.R
-import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 
 
 @Composable

@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.rkbapps.makautsgpaygpacalculator.db.entity.GpaPercentage
-import com.rkbapps.makautsgpaygpacalculator.ui.screens.home.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.Constant
 import java.text.SimpleDateFormat
 import java.util.Locale
