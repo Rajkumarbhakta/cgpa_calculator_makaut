@@ -22,6 +22,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -33,8 +34,10 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rkbapps.makautsgpaygpacalculator.db.entity.GpaPercentage
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.ButtonRow
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
@@ -43,14 +46,7 @@ fun SgpaYgpaPercentageCalculatorScreen(
     viewModel: SgpaYgpaPercentageViewModel = hiltViewModel()
 ) {
 
-    val context = LocalContext.current
-
-    val cgpaYgpa = rememberSaveable {
-        mutableStateOf("")
-    }
-    val percentage = rememberSaveable {
-        mutableDoubleStateOf(0.0)
-    }
+    val state by viewModel.state.collectAsStateWithLifecycle()
 
     Scaffold(topBar = {
         AppTopBar(showBack = true) {
@@ -63,8 +59,8 @@ fun SgpaYgpaPercentageCalculatorScreen(
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .verticalScroll(rememberScrollState())
         ) {
-            if (cgpaYgpa.value.isEmpty()) {
-                percentage.doubleValue = 0.0
+            if (state.cgpaYgpa.isEmpty()) {
+                viewModel.updatePercentage(0.0)
             }
             Text(
                 text = "Your SGPA/YGPA :",
@@ -75,61 +71,24 @@ fun SgpaYgpaPercentageCalculatorScreen(
                 textAlign = TextAlign.Center
             )
             OutlinedTextField(
-                value = cgpaYgpa.value,
+                value = state.cgpaYgpa,
                 onValueChange = { cgpa ->
-                    cgpaYgpa.value = cgpa
+                    viewModel.updateCgpa(cgpa)
                 },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 singleLine = true
             )
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-            ) {
-                Row {
 
-                    Button(onClick = {
-
-                        try {
-                            if (cgpaYgpa.value.isNotEmpty() && cgpaYgpa.value.toDouble() <= 10) {
-                                percentage.doubleValue =
-                                    calculatePercentage(cgpaYgpa.value.toDouble())
-
-                                viewModel.insert(
-                                    GpaPercentage(
-                                        gpa = cgpaYgpa.value.toDouble(),
-                                        percentage = percentage.doubleValue
-                                    )
-                                )
-
-                            } else {
-                                Toast.makeText(context, "Enter CGPA/YGPA.", Toast.LENGTH_SHORT)
-                                    .show()
-                            }
-                        } catch (_: Exception) {
-                            Toast.makeText(context, "Enter proper CGPA/YGPA.", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }, modifier = Modifier.weight(1f)) {
-                        Text(text = "Calculate")
-                    }
-
-                    Spacer(modifier = Modifier.width(8.dp))
-                    Button(onClick = {
-                        cgpaYgpa.value = ""
-                        percentage.doubleValue = 0.0
-                    }, modifier = Modifier.weight(1f)) {
-                        Text(text = "Reset")
-                    }
-
+            ButtonRow(
+                onReset = {
+                    viewModel.clear()
                 }
+            ) {
+                viewModel.calculate()
             }
 
-            AnimatedVisibility(percentage.doubleValue > 0.0) {
+            AnimatedVisibility(state.percentage > 0.0) {
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -144,7 +103,7 @@ fun SgpaYgpaPercentageCalculatorScreen(
                             verticalArrangement = Arrangement.Center
                         ) {
 
-                            Text(text = "Your percentage : ${percentage.doubleValue}%")
+                            Text(text = "Your percentage : ${state.percentage}%")
 
                         }
                     }
