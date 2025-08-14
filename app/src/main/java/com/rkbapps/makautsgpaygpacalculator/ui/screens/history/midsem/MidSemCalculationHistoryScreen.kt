@@ -186,23 +186,23 @@ fun MidSemHistoryItem(item: DgpaMidSemMarks, onDeleted: () -> Unit) {
                         value = item.secondSemGpa
                     )
                     if (item.thirdSemGpa > 0.0) MidSemHistoryItemRowItem(
-                        title = Options.THIRD_SEM,
+                        title = Options.THIRD_SEM.value,
                         value = item.thirdSemGpa
                     )
                     if (item.fourthSemGpa > 0.0) MidSemHistoryItemRowItem(
-                        title = Options.FOURTH_SEM,
+                        title = Options.FOURTH_SEM.value,
                         value = item.fourthSemGpa
                     )
                     if (item.fifthSemGpa > 0.0) MidSemHistoryItemRowItem(
-                        title = Options.FIFTH_SEM,
+                        title = Options.FIFTH_SEM.value,
                         value = item.fifthSemGpa
                     )
                     if (item.sixthSemGpa > 0.0) MidSemHistoryItemRowItem(
-                        title = Options.SIXTH_SEM,
+                        title = Options.SIXTH_SEM.value,
                         value = item.sixthSemGpa
                     )
                     if (item.seventhSemGpa > 0.0) MidSemHistoryItemRowItem(
-                        title = Options.SEVENTH_SEM,
+                        title = Options.SEVENTH_SEM.value,
                         value = item.seventhSemGpa
                     )
                     if (item.eighthSemGpa > 0.0) MidSemHistoryItemRowItem(
