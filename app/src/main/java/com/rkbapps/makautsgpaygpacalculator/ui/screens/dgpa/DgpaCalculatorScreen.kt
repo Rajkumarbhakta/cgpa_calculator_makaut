@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
@@ -44,13 +45,15 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
 
     Scaffold(topBar = { AppTopBar(showBack = true) { backStack.removeLastOrNull() } }) { innerPadding ->
         Column(
-            modifier = Modifier.padding(innerPadding).padding(horizontal = 16.dp, vertical = 8.dp)
+            modifier = Modifier.padding(innerPadding).padding(horizontal = 16.dp, vertical = 8.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             Text(
                 text = "Choose your course duration:",
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.fillMaxWidth()
             )
+
             Row(
                 modifier = Modifier.fillMaxWidth().horizontalScroll(rememberScrollState()),
                 horizontalArrangement = Arrangement.spacedBy(4.dp, alignment = Alignment.CenterHorizontally),
@@ -70,33 +73,29 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
                     }
                 }
             }
+
             Column(
                 Modifier.fillMaxWidth().verticalScroll(rememberScrollState()),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
+                verticalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Text(text = "Enter all eight semester SGPA : ", style = MaterialTheme.typography.titleMedium)
+                Text(text = "Enter all semester SGPA : ", style = MaterialTheme.typography.titleMedium)
                 AnimatedVisibility(state.currentSelectedCourseType == CourseType.FOUR_YEAR_DEGREE ||
                         state.currentSelectedCourseType == CourseType.THREE_YEAR_DEGREE) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         SemesterSgpaInputField(
-                            value = state.firstSemMark,
-                            modifier = Modifier.weight(1f),
+                            value = state.firstSemMark, modifier = Modifier.weight(1f),
                             placeHolderText = "1st",
-                            semNumber = 1
                         ){
                             val update = state.copy(firstSemMark = it)
                             viewModel.updateState(update)
                         }
-                        Spacer(modifier = Modifier.width(5.dp))
                         SemesterSgpaInputField(
-                            value = state.secondSemMark,
-                            modifier = Modifier.weight(1f),
+                            value = state.secondSemMark, modifier = Modifier.weight(1f),
                             placeHolderText = "2nd",
-                            semNumber = 2
                         ){
                             val update = state.copy(secondSemMark = it)
                             viewModel.updateState(update)
@@ -105,24 +104,19 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     SemesterSgpaInputField(
-                        value = state.thirdSemMark,
-                        modifier = Modifier.weight(1f),
+                        value = state.thirdSemMark, modifier = Modifier.weight(1f),
                         placeHolderText = "3rd",
-                        semNumber = 3
                     ){
                         val update = state.copy(thirdSemMark = it)
                         viewModel.updateState(update)
                     }
-                    Spacer(modifier = Modifier.width(5.dp))
                     SemesterSgpaInputField(
-                        value = state.fourthSemMark,
-                        modifier = Modifier.weight(1f),
+                        value = state.fourthSemMark, modifier = Modifier.weight(1f),
                         placeHolderText = "4th",
-                        semNumber = 4
                     ){
                         val update = state.copy(fourthSemMark = it)
                         viewModel.updateState(update)
@@ -130,24 +124,19 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
                 }
                 Row(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.Center,
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     SemesterSgpaInputField(
-                        value = state.fiveSemMark,
-                        modifier = Modifier.weight(1f),
+                        value = state.fiveSemMark, modifier = Modifier.weight(1f),
                         placeHolderText = "5th",
-                        semNumber = 5
                     ){
                         val update = state.copy(fiveSemMark = it)
                         viewModel.updateState(update)
                     }
-                    Spacer(modifier = Modifier.width(5.dp))
                     SemesterSgpaInputField(
-                        value = state.sixSemMark,
-                        modifier = Modifier.weight(1f),
+                        value = state.sixSemMark, modifier = Modifier.weight(1f),
                         placeHolderText = "6th",
-                        semNumber = 6
                     ){
                         val update = state.copy(sixSemMark = it)
                         viewModel.updateState(update)
@@ -159,24 +148,19 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
                 ) {
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         SemesterSgpaInputField(
-                            value = state.sevenSemMark,
-                            modifier = Modifier.weight(1f),
+                            value = state.sevenSemMark, modifier = Modifier.weight(1f),
                             placeHolderText = "7th",
-                            semNumber = 7
                         ){
                             val update = state.copy(sevenSemMark = it)
                             viewModel.updateState(update)
                         }
-                        Spacer(modifier = Modifier.width(5.dp))
                         SemesterSgpaInputField(
-                            value = state.eightSemMark,
-                            modifier = Modifier.weight(1f),
+                            value = state.eightSemMark, modifier = Modifier.weight(1f),
                             placeHolderText = "8th",
-                            semNumber = 8
                         ){
                             val update = state.copy(eightSemMark = it)
                             viewModel.updateState(update)
@@ -198,7 +182,6 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
                                 modifier = Modifier.fillMaxWidth(),
                                 textAlign = TextAlign.Center
                             )
-
                             Text(
                                 text = "Overall Percentage : ${state.percentage}%",
                                 style = MaterialTheme.typography.titleMedium,
@@ -229,27 +212,31 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
 }
 
 enum class CourseType(val value:String){
+    FOUR_YEAR_DEGREE("4 year degree"),
     THREE_YEAR_DEGREE("3 year degree"),
     THREE_YEAR_LATERAL("3 year lateral"),
-    FOUR_YEAR_DEGREE("4 year degree")
+
 }
 
 
 @Composable
 fun SemesterSgpaInputField(
-    value: String, modifier: Modifier, placeHolderText: String, semNumber: Int,
+    value: String, modifier: Modifier, placeHolderText: String,
     onValueChange:(String)-> Unit
 ) {
-    OutlinedTextField(
-        value = value,
-        onValueChange = onValueChange,
-        modifier = modifier,
-        placeholder = { Text(text = "$placeHolderText Semester") },
-        label = { Text(text = "Sem $semNumber") },
-        supportingText = { Text(text = "Enter $placeHolderText semester SGPA.") },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-        singleLine = true
-    )
+    Column( modifier = modifier,) {
+        Text("$placeHolderText Semester")
+        OutlinedTextField(
+            value = value,
+            onValueChange = onValueChange,
+           modifier= Modifier.fillMaxWidth(),
+            placeholder = { Text(text = "SGPA") },
+//            supportingText = { Text(text = "Enter $placeHolderText semester SGPA.") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            singleLine = true,
+            shape = RoundedCornerShape(12.dp)
+        )
+    }
 }
 
 
