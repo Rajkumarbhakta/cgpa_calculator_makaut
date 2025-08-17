@@ -1,6 +1,5 @@
 package com.rkbapps.makautsgpaygpacalculator.ui.screens.midsem
 
-import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -8,14 +7,12 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -23,38 +20,27 @@ import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.MenuAnchorType
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableDoubleStateOf
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
-import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarksTypes
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.ButtonRow
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.NotesCard
-import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
-import java.util.Locale
 
 
 @Composable
@@ -66,9 +52,7 @@ fun MidSemCalculatorScreen(
 
 
     Scaffold(topBar = {
-        AppTopBar(showBack = true) {
-            backStack.removeLastOrNull()
-        }
+        AppTopBar(showBack = true) { backStack.removeLastOrNull() }
     }) { innerPadding ->
         Column(
             modifier = Modifier.fillMaxWidth().padding(innerPadding)
@@ -99,23 +83,15 @@ fun MidSemCalculatorScreen(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            SemesterNumberFromItem(
-                semester = "1st Semester",
-                cgpa = state.firstSemCgpa
-            ) {
+            SemesterNumberFromItem(semester = "1st Semester", cgpa = state.firstSemCgpa) {
                 val update = state.copy(firstSemCgpa = it)
                 viewModel.update(update)
             }
-            SemesterNumberFromItem(
-                semester = "2nd Semester",
-                cgpa = state.secondSemCgpa
-            ) {
+            SemesterNumberFromItem(semester = "2nd Semester", cgpa = state.secondSemCgpa) {
                 val update = state.copy(secondSemCgpa = it)
                 viewModel.update(update)
             }
-            SemesterNumberFromItem(
-                semester = Options.THIRD_SEM.value,
-                cgpa = state.thirdSemCgpa
+            SemesterNumberFromItem(semester = Options.THIRD_SEM.value, cgpa = state.thirdSemCgpa
             ) {
                 val update = state.copy(thirdSemCgpa = it)
                 viewModel.update(update)
@@ -128,10 +104,7 @@ fun MidSemCalculatorScreen(
                         || state.selectedOption == Options.SIXTH_SEM
                         || state.selectedOption == Options.SEVENTH_SEM
             ) {
-                SemesterNumberFromItem(
-                    semester = Options.FOURTH_SEM.value,
-                    cgpa = state.fourthSemCgpa
-                ){
+                SemesterNumberFromItem(semester = Options.FOURTH_SEM.value, cgpa = state.fourthSemCgpa){
                     val update = state.copy(fourthSemCgpa = it)
                     viewModel.update(update)
                 }
@@ -142,10 +115,7 @@ fun MidSemCalculatorScreen(
                         || state.selectedOption == Options.SIXTH_SEM
                         || state.selectedOption == Options.SEVENTH_SEM
             ) {
-                SemesterNumberFromItem(
-                    semester = Options.FIFTH_SEM.value,
-                    cgpa = state.fifthSemCgpa
-                ){
+                SemesterNumberFromItem(semester = Options.FIFTH_SEM.value, cgpa = state.fifthSemCgpa){
                     val update = state.copy(fifthSemCgpa = it)
                     viewModel.update(update)
                 }
@@ -155,20 +125,14 @@ fun MidSemCalculatorScreen(
                 state.selectedOption == Options.SIXTH_SEM
                         || state.selectedOption == Options.SEVENTH_SEM
             ) {
-                SemesterNumberFromItem(
-                    semester = Options.SIXTH_SEM.value,
-                    cgpa = state.sixthSemCgpa
-                ){
+                SemesterNumberFromItem(semester = Options.SIXTH_SEM.value, cgpa = state.sixthSemCgpa){
                     val update = state.copy(sixthSemCgpa = it)
                     viewModel.update(update)
                 }
             }
 
             AnimatedVisibility  (state.selectedOption == Options.SEVENTH_SEM) {
-                SemesterNumberFromItem(
-                    semester = Options.SEVENTH_SEM.value,
-                    cgpa = state.seventhSemCgpa
-                ){
+                SemesterNumberFromItem(semester = Options.SEVENTH_SEM.value, cgpa = state.seventhSemCgpa){
                     val update = state.copy(seventhSemCgpa = it)
                     viewModel.update(update)
                 }
@@ -181,11 +145,7 @@ fun MidSemCalculatorScreen(
 
             AnimatedVisibility  (state.totalGpa > 0.0 && state.percentage > 0.0) {
                 Card {
-                    Column(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(8.dp)
-                    ) {
+                    Column(modifier =  Modifier.fillMaxWidth().padding(8.dp)) {
 
                         Row(
                             modifier = Modifier.fillMaxWidth(),
@@ -231,20 +191,16 @@ fun SemesterNumberFromItem(
     cgpa: String,
     onChange:(String)->Unit
 ) {
-    Row(
-        Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-
-        Text(text = semester, style = MaterialTheme.typography.titleSmall)
-        Spacer(modifier = Modifier.width(5.dp))
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Text(text = semester, style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Normal))
         OutlinedTextField(
             value = cgpa,
             onValueChange = onChange,
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-            modifier = Modifier.weight(1f),
-            singleLine = true
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
+            placeholder = {Text("SGPA")},
+            modifier = Modifier.fillMaxWidth(),
+            singleLine = true,
+            shape = RoundedCornerShape(12.dp)
         )
     }
 }
