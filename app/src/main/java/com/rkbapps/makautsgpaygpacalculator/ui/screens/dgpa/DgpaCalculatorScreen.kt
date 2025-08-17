@@ -28,6 +28,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -225,14 +227,14 @@ fun SemesterSgpaInputField(
     onValueChange:(String)-> Unit
 ) {
     Column( modifier = modifier,) {
-        Text("$placeHolderText Semester")
+        Text("$placeHolderText Semester", style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Normal))
         OutlinedTextField(
             value = value,
             onValueChange = onValueChange,
            modifier= Modifier.fillMaxWidth(),
             placeholder = { Text(text = "SGPA") },
 //            supportingText = { Text(text = "Enter $placeHolderText semester SGPA.") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Next),
             singleLine = true,
             shape = RoundedCornerShape(12.dp)
         )

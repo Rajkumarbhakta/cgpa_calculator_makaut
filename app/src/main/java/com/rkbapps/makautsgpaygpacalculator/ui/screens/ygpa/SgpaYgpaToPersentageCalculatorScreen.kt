@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -30,6 +31,7 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,32 +55,32 @@ fun SgpaYgpaPercentageCalculatorScreen(
         AppTopBar(showBack = true) {
             backStack.removeLastOrNull()
         }
-    }) {
+    }) { innerPadding->
+
         Column(
             modifier = Modifier
-                .padding(it)
+                .padding(innerPadding)
                 .padding(horizontal = 16.dp, vertical = 8.dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
             if (state.cgpaYgpa.isEmpty()) {
                 viewModel.updatePercentage(0.0)
             }
             Text(
                 text = "Your SGPA/YGPA :",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth(),
                 style = MaterialTheme.typography.titleMedium,
                 textAlign = TextAlign.Center
             )
+
             OutlinedTextField(
                 value = state.cgpaYgpa,
-                onValueChange = { cgpa ->
-                    viewModel.updateCgpa(cgpa)
-                },
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                singleLine = true
+                onValueChange = { cgpa -> viewModel.updateCgpa(cgpa) },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
+                singleLine = true,
+                shape = RoundedCornerShape(12.dp)
             )
 
             ButtonRow(
@@ -91,9 +93,7 @@ fun SgpaYgpaPercentageCalculatorScreen(
 
             AnimatedVisibility(state.percentage > 0.0) {
                 Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)
                 ) {
                     Card {
                         Column(
