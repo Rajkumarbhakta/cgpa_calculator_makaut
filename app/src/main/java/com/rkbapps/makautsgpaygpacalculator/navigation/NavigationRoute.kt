@@ -1,8 +1,9 @@
 package com.rkbapps.makautsgpaygpacalculator.navigation
 
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
-sealed class NavigationRoute() {
+sealed class NavigationRoute() : NavKey {
     @Serializable
     data object Home : NavigationRoute()
 
