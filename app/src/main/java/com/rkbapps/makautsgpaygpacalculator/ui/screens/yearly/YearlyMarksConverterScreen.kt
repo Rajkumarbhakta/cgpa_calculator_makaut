@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
@@ -53,7 +54,8 @@ fun YearlyMarksConverterScreen(
             modifier = Modifier
                 .padding(innerPadding)
                 .padding(vertical = 8.dp, horizontal = 16.dp)
-                .verticalScroll(rememberScrollState())
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
 
             if (state.oddSemSgpa.isEmpty()) {
@@ -61,21 +63,15 @@ fun YearlyMarksConverterScreen(
                 viewModel.update(update)
             }
             if (state.oddSemTotalSubject.isEmpty()) {
-                val update = state.copy(
-                    oddSemTotalNumber="",yearTotalNumber=""
-                )
+                val update = state.copy(oddSemTotalNumber="",yearTotalNumber="")
                 viewModel.update(update)
             }
             if (state.evenSemSgpa.isEmpty()) {
-                val update = state.copy(
-                    evenSemPercentage="",yearPercentage=""
-                )
+                val update = state.copy(evenSemPercentage="",yearPercentage="")
                 viewModel.update(update)
             }
             if (state.evenSemTotalSubject.isEmpty()) {
-                val update = state.copy(
-                    evenSemTotalNumber="",yearTotalNumber=""
-                )
+                val update = state.copy(evenSemTotalNumber="",yearTotalNumber="")
                 viewModel.update(update)
             }
 
@@ -83,12 +79,10 @@ fun YearlyMarksConverterScreen(
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
                 Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(5.dp)
+                    modifier = Modifier.weight(1f)
                 ) {
                     SemesterInputItem(
                         title = "Odd Sem",
@@ -105,9 +99,7 @@ fun YearlyMarksConverterScreen(
                     )
                 }
                 Box(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(5.dp)
+                    modifier = Modifier.weight(1f)
                 ) {
                     SemesterInputItem(
                         title = "Even Sem",
@@ -131,44 +123,32 @@ fun YearlyMarksConverterScreen(
                 onCalculate = viewModel::calculate
             )
 
-            Row(modifier = Modifier.fillMaxWidth()) {
-                AnimatedVisibility(state.oddSemPercentage.isNotEmpty()
-                        && state.oddSemTotalNumber.isNotEmpty()
-                        && state.oddSemObtainedNumber.isNotEmpty(),
-                    modifier = Modifier
-                        .weight(1f)
+            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+                AnimatedVisibility(
+                    state.oddSemPercentage.isNotEmpty() && state.oddSemTotalNumber.isNotEmpty() && state.oddSemObtainedNumber.isNotEmpty(),
+                    modifier = Modifier.weight(1f)
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(5.dp)
-                    ) {
-                        ResultCardItem(
-                            title = "Odd Sem",
-                            obtainedNumber = state.oddSemObtainedNumber,
-                            totalNumber = state.oddSemTotalNumber,
-                            percentage = "${state.oddSemPercentage}%"
-                        )
-                    }
+                    ResultCardItem(
+                        modifier = Modifier.weight(1f),
+                        title = "Odd Sem",
+                        obtainedNumber = state.oddSemObtainedNumber,
+                        totalNumber = state.oddSemTotalNumber,
+                        percentage = "${state.oddSemPercentage}%"
+                    )
                 }
-                AnimatedVisibility(state.evenSemObtainedNumber.isNotEmpty()
-                        && state.evenSemPercentage.isNotEmpty()
-                        && state.evenSemTotalNumber.isNotEmpty(),
-                    modifier = Modifier
-                        .weight(1f)
+                AnimatedVisibility(
+                    state.evenSemObtainedNumber.isNotEmpty() && state.evenSemPercentage.isNotEmpty() && state.evenSemTotalNumber.isNotEmpty(),
+                    modifier = Modifier.weight(1f)
                 ) {
-                    Box(
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(5.dp)
-                    ) {
-                        ResultCardItem(
-                            title = "Even Sem",
-                            obtainedNumber = state.evenSemObtainedNumber,
-                            totalNumber = state.evenSemTotalNumber,
-                            percentage = "${state.evenSemPercentage}%"
-                        )
-                    }
+
+                    ResultCardItem(
+                        modifier = Modifier.weight(1f),
+                        title = "Even Sem",
+                        obtainedNumber = state.evenSemObtainedNumber,
+                        totalNumber = state.evenSemTotalNumber,
+                        percentage = "${state.evenSemPercentage}%"
+                    )
+
                 }
             }
 
@@ -201,14 +181,12 @@ fun SemesterInputItem(
     onTotalSubValueChange:(String)-> Unit,
     onSgpaValueChange:(String)->Unit
 ) {
-    Card(
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
+    Card {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp),
-            verticalArrangement = Arrangement.Center,
+            verticalArrangement = Arrangement.spacedBy(10.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
@@ -218,29 +196,22 @@ fun SemesterInputItem(
                 modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
-            Spacer(modifier = Modifier.height(8.dp))
+
             OutlinedTextField(
                 value = totalSubject, onValueChange = onTotalSubValueChange,
-                placeholder = { Text(text = "0") },
-                supportingText = {
-                    Text(
-                        text = "Enter total subjects including practical subjects.",
-                    )
-                }, keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                placeholder = { Text(text = "Total Subjects") },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true
+                singleLine = true,
+                shape = RoundedCornerShape(12.dp)
             )
             OutlinedTextField(
                 value = sgpa, onValueChange = onSgpaValueChange,
-                placeholder = { Text(text = "0.0") },
-                supportingText = {
-                    Text(
-                        text = "Enter your semester SGPA.",
-                    )
-                },
+                placeholder = { Text(text = "SGPA") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 modifier = Modifier.fillMaxWidth(),
-                singleLine = true
+                singleLine = true,
+                shape = RoundedCornerShape(12.dp)
             )
         }
     }
@@ -248,12 +219,13 @@ fun SemesterInputItem(
 
 @Composable
 fun ResultCardItem(
+    modifier: Modifier= Modifier,
     title: String,
     obtainedNumber: String,
     totalNumber: String,
     percentage: String
 ) {
-    Card {
+    Card(modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
