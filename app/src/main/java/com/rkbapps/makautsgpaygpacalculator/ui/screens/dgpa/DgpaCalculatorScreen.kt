@@ -34,6 +34,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.ButtonRow
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.NotesCard
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
@@ -208,43 +209,19 @@ fun DgpaCalculatorScreen(backStack: SnapshotStateList<Any>, viewModel: DgpaCalcu
                         }
                     }
                 }
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(5.dp)
-                ) {
-                    OutlinedCard {
-                        Column(
-                            Modifier
-                                .fillMaxWidth()
-                                .padding(10.dp)
-                        ) {
-                            Text(
-                                text = "Notes",
-                                style = MaterialTheme.typography.titleSmall,
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Center
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                text = when(state.currentSelectedCourseType){
-                                    CourseType.FOUR_YEAR_DEGREE ->{
-                                        "Enter all of your 8 semester SGPA in proper place and hit 'Calculate' button to calculate your overall percentage and  DGPA (Degree Grade Point)."
-                                    }
-                                    CourseType.THREE_YEAR_DEGREE->{
-                                        "Enter all of your 6 semester SGPA in proper place and hit 'Calculate' button to calculate your overall percentage and  DGPA (Degree Grade Point)."
-                                    }
-                                    CourseType.THREE_YEAR_LATERAL->{
-                                        "Enter all of your 6 semester (start from 3rd semester to 8th semester) SGPA in proper place and hit 'Calculate' button to calculate your overall percentage and  DGPA (Degree Grade Point)."
-                                    }
-                                },
-                                style = MaterialTheme.typography.bodyMedium,
-                                modifier = Modifier.fillMaxWidth(),
-                                textAlign = TextAlign.Justify
-                            )
-                        }
+
+
+                NotesCard(when(state.currentSelectedCourseType){
+                    CourseType.FOUR_YEAR_DEGREE ->{
+                        "Enter all of your 8 semester SGPA in proper place and hit 'Calculate' button to calculate your overall percentage and  DGPA (Degree Grade Point)."
                     }
-                }
+                    CourseType.THREE_YEAR_DEGREE->{
+                        "Enter all of your 6 semester SGPA in proper place and hit 'Calculate' button to calculate your overall percentage and  DGPA (Degree Grade Point)."
+                    }
+                    CourseType.THREE_YEAR_LATERAL->{
+                        "Enter all of your 6 semester (start from 3rd semester to 8th semester) SGPA in proper place and hit 'Calculate' button to calculate your overall percentage and  DGPA (Degree Grade Point)."
+                    }
+                })
             }
         }
     }

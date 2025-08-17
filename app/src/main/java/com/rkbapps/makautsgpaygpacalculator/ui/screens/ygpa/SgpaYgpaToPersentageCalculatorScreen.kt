@@ -38,6 +38,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rkbapps.makautsgpaygpacalculator.db.entity.GpaPercentage
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.ButtonRow
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.NotesCard
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 
 @Composable
@@ -110,38 +111,9 @@ fun SgpaYgpaPercentageCalculatorScreen(
                 }
             }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp, vertical = 8.dp)
-            ) {
 
-                OutlinedCard {
+            NotesCard( "Convert your CGPA / YGPA / SGPA to percentage.Put your CGPA and press the calculate button to get the percentage value.")
 
-                    Column(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(10.dp)
-                    ) {
-
-                        Text(
-                            text = "Notes",
-                            style = MaterialTheme.typography.titleSmall,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Text(
-                            text = "Convert your CGPA / YGPA / SGPA to percentage.Put your CGPA and press the calculate button to get the percentage value.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Justify
-                        )
-                    }
-                }
-            }
 
             Box(
                 modifier = Modifier
@@ -153,7 +125,7 @@ fun SgpaYgpaPercentageCalculatorScreen(
                     Column(Modifier.padding(5.dp)) {
                         OutlinedCard {
                             Text(
-                                text = "Makaut Ten Point Scale",
+                                text = "MAKAUT Ten Point Scale",
                                 style = MaterialTheme.typography.titleMedium,
                                 modifier = Modifier
                                     .fillMaxWidth()

@@ -52,6 +52,7 @@ import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarks
 import com.rkbapps.makautsgpaygpacalculator.db.entity.DgpaMidSemMarksTypes
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.ButtonRow
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.NotesCard
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import java.util.Locale
 
@@ -70,11 +71,8 @@ fun MidSemCalculatorScreen(
         }
     }) { innerPadding ->
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(innerPadding)
-                .padding(vertical = 8.dp, horizontal = 16.dp)
-                .verticalScroll(rememberScrollState()),
+            modifier = Modifier.fillMaxWidth().padding(innerPadding)
+                .padding(vertical = 8.dp, horizontal = 16.dp).verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(10.dp)
         ) {
 
@@ -100,7 +98,6 @@ fun MidSemCalculatorScreen(
                 style = MaterialTheme.typography.titleMedium,
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(5.dp))
 
             SemesterNumberFromItem(
                 semester = "1st Semester",
@@ -220,35 +217,9 @@ fun MidSemCalculatorScreen(
             }
 
 
-            Box(modifier = Modifier.fillMaxWidth()
-            ) {
-
-                OutlinedCard {
-
-                    Column(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(10.dp)
-                    ) {
-
-                        Text(
-                            text = "Notes",
-                            style = MaterialTheme.typography.titleSmall,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Text(
-                            text = "Calculate your average(GPA) and percentage in the middle of the semester.First choose the semester up to which semester you want to calculate and then put your GPA accordingly. ",
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Justify
-                        )
-                    }
-                }
-            }
+            NotesCard(
+                text = "Calculate your average(GPA) and percentage in the middle of the semester.First choose the semester up to which semester you want to calculate and then put your GPA accordingly. "
+            )
         }
     }
 }

@@ -33,6 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.ButtonRow
+import com.rkbapps.makautsgpaygpacalculator.ui.composables.NotesCard
 
 @Composable
 fun YearlyMarksConverterScreen(
@@ -186,38 +187,7 @@ fun YearlyMarksConverterScreen(
                 }
             }
 
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(5.dp)
-            ) {
-
-                OutlinedCard {
-
-                    Column(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(10.dp)
-                    ) {
-
-                        Text(
-                            text = "Notes",
-                            style = MaterialTheme.typography.titleSmall,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Center
-                        )
-
-                        Spacer(modifier = Modifier.height(8.dp))
-
-                        Text(
-                            text = "Enter even an odd semester SGPA and total number of subjects (total theory subjects + total practical subjects) to calculate your total marks, obtained marks, and percentage.",
-                            style = MaterialTheme.typography.bodyMedium,
-                            modifier = Modifier.fillMaxWidth(),
-                            textAlign = TextAlign.Justify
-                        )
-                    }
-                }
-            }
+            NotesCard("Enter even an odd semester SGPA and total number of subjects (total theory subjects + total practical subjects) to calculate your total marks, obtained marks, and percentage.")
         }
     }
 }
