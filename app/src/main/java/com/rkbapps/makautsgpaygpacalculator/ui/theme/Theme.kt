@@ -2,7 +2,9 @@ package com.rkbapps.makautsgpaygpacalculator.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.MotionScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
@@ -74,6 +76,7 @@ private val LightColors = lightColorScheme(
     scrim = md_theme_light_scrim,
 )
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun CGPACalculatorMAKAUTTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
@@ -93,6 +96,7 @@ fun CGPACalculatorMAKAUTTheme(
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
+        motionScheme = MotionScheme.expressive(),
         content = content
     )
 }
