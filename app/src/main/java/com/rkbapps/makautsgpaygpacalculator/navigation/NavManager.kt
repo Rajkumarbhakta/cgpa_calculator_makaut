@@ -6,12 +6,10 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
-import androidx.navigation3.runtime.EntryProviderBuilder
-import androidx.navigation3.runtime.entry
+import androidx.navigation3.runtime.EntryProviderScope
 import androidx.navigation3.runtime.entryProvider
-import androidx.navigation3.runtime.rememberSavedStateNavEntryDecorator
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
-import androidx.navigation3.ui.rememberSceneSetupNavEntryDecorator
 import com.rkbapps.makautsgpaygpacalculator.navigation.NavigationRoute.Home
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.about.AboutScreen
 import com.rkbapps.makautsgpaygpacalculator.ui.screens.dgpa.DgpaCalculatorScreen
@@ -42,8 +40,7 @@ fun NavManager(
 ) {
     NavDisplay(
         entryDecorators = listOf(
-            rememberSceneSetupNavEntryDecorator(),
-            rememberSavedStateNavEntryDecorator(),
+            rememberSaveableStateHolderNavEntryDecorator(),
             rememberViewModelStoreNavEntryDecorator()
         ),
         backStack = backStack, onBack = { backStack.removeLastOrNull() },
@@ -74,7 +71,7 @@ fun NavManager(
  * @param backStack The `SnapshotStateList` representing the current navigation back stack.
  *                  This is used by the screens to manage navigation.
  */
-fun EntryProviderBuilder<Any>.mainNavDisplay(backStack: SnapshotStateList<Any>) {
+fun EntryProviderScope<Any>.mainNavDisplay(backStack: SnapshotStateList<Any>) {
     entry<Home> {
         HomeScreen(backStack = backStack)
     }
@@ -106,7 +103,7 @@ fun EntryProviderBuilder<Any>.mainNavDisplay(backStack: SnapshotStateList<Any>) 
  * @param backStack The snapshot state list representing the navigation back stack.
  *                  This is passed to each history screen to enable navigation.
  */
-fun EntryProviderBuilder<Any>.historyNavGraph(backStack: SnapshotStateList<Any>) {
+fun EntryProviderScope<Any>.historyNavGraph(backStack: SnapshotStateList<Any>) {
     entry<NavigationRoute.History>() {
         HistoryScreen(backStack = backStack)
     }

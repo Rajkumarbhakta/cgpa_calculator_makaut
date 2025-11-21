@@ -36,8 +36,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavHostController
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.rkbapps.makautsgpaygpacalculator.db.entity.YearlyMarks
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.utils.Constant
