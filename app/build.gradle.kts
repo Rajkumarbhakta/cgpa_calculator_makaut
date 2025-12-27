@@ -19,8 +19,8 @@ android {
         applicationId = "com.rkbapps.makautsgpaygpacalculator"
         minSdk = 24
         targetSdk = 36
-        versionCode = 11
-        versionName = "2.9"
+        versionCode = 12
+        versionName = "3.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
