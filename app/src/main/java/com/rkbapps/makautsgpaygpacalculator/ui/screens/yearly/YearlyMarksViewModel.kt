@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rkbapps.makautsgpaygpacalculator.db.dao.YearlyMarksDao
 import com.rkbapps.makautsgpaygpacalculator.db.entity.YearlyMarks
+import com.rkbapps.makautsgpaygpacalculator.ui.screens.yearly.UserAction
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateObtainedNumber
 import com.rkbapps.makautsgpaygpacalculator.utils.calculatePercentage
 import com.rkbapps.makautsgpaygpacalculator.utils.calculateTotalNumber
@@ -28,11 +29,24 @@ class YearlyMarksViewModel @Inject constructor(
 
 
 
-    fun insert(yearlyMarks: YearlyMarks) = viewModelScope.launch(Dispatchers.IO) {
+    fun onAction(userAction: UserAction){
+        when(userAction){
+            UserAction.OnReset -> clear()
+            UserAction.OnSubmit -> calculate()
+            is UserAction.OnUpdate -> {
+                update(state = userAction.input)
+            }
+        }
+    }
+
+
+
+
+    private fun insert(yearlyMarks: YearlyMarks) = viewModelScope.launch(Dispatchers.IO) {
         yearlyMarksDao.insert(yearlyMarks)
     }
 
-    fun calculate(){
+    private fun calculate(){
         try {
             if (state.value.oddSemTotalSubject.isNotEmpty() && state.value.oddSemSgpa.isNotEmpty()) {
                 if (state.value.oddSemSgpa.toDouble() <= 10) {
@@ -152,13 +166,13 @@ class YearlyMarksViewModel @Inject constructor(
         }
     }
 
-    fun update(state: YearlyMarksConverterState){
+    private fun update(state: YearlyMarksConverterState){
         _state.update {
             state
         }
     }
 
-    fun clear(){
+    private fun clear(){
         _state.update {
             YearlyMarksConverterState()
         }

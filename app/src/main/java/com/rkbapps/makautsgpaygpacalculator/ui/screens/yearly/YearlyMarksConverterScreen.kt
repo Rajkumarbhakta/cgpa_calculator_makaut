@@ -15,9 +15,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -30,7 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.AppTopBar
 import com.rkbapps.makautsgpaygpacalculator.ui.composables.ButtonRow
@@ -60,19 +58,19 @@ fun YearlyMarksConverterScreen(
 
             if (state.oddSemSgpa.isEmpty()) {
                 val update = state.copy(oddSemPercentage="", yearPercentage="")
-                viewModel.update(update)
+                viewModel.onAction(UserAction.OnUpdate(update))
             }
             if (state.oddSemTotalSubject.isEmpty()) {
                 val update = state.copy(oddSemTotalNumber="",yearTotalNumber="")
-                viewModel.update(update)
+                viewModel.onAction(UserAction.OnUpdate(update))
             }
             if (state.evenSemSgpa.isEmpty()) {
                 val update = state.copy(evenSemPercentage="",yearPercentage="")
-                viewModel.update(update)
+                viewModel.onAction(UserAction.OnUpdate(update))
             }
             if (state.evenSemTotalSubject.isEmpty()) {
                 val update = state.copy(evenSemTotalNumber="",yearTotalNumber="")
-                viewModel.update(update)
+                viewModel.onAction(UserAction.OnUpdate(update))
             }
 
 
@@ -90,11 +88,11 @@ fun YearlyMarksConverterScreen(
                         sgpa = state.oddSemSgpa,
                         onTotalSubValueChange = {
                             val update = state.copy(oddSemTotalSubject = it)
-                            viewModel.update(update)
+                            viewModel.onAction(UserAction.OnUpdate(update))
                         },
                         onSgpaValueChange = {
                             val update = state.copy(oddSemSgpa = it)
-                            viewModel.update(update)
+                            viewModel.onAction(UserAction.OnUpdate(update))
                         }
                     )
                 }
@@ -107,11 +105,11 @@ fun YearlyMarksConverterScreen(
                         sgpa = state.evenSemSgpa,
                         onTotalSubValueChange = {
                             val update = state.copy(evenSemTotalSubject = it)
-                            viewModel.update(update)
+                            viewModel.onAction(UserAction.OnUpdate(update))
                         },
                         onSgpaValueChange = {
                             val update = state.copy(evenSemSgpa = it)
-                            viewModel.update(update)
+                            viewModel.onAction(UserAction.OnUpdate(update))
                         }
                     )
                 }
@@ -119,8 +117,8 @@ fun YearlyMarksConverterScreen(
 
 
             ButtonRow(
-                onReset = viewModel::clear,
-                onCalculate = viewModel::calculate
+                onReset = {viewModel.onAction(UserAction.OnReset)},
+                onCalculate = { viewModel.onAction(UserAction.OnSubmit) }
             )
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
